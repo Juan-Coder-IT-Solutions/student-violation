@@ -21,7 +21,7 @@ if (isset($_SESSION['dvsa_user_id'])) {
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Sign in - CHMSU</title>
+    <title>Forgot Password - CHMSU</title>
     <!-- CSS files -->
     <link href="./dist/css/tabler.min.css?1684106062" rel="stylesheet" />
     <link href="./dist/css/tabler-flags.min.css?1684106062" rel="stylesheet" />
@@ -41,23 +41,26 @@ if (isset($_SESSION['dvsa_user_id'])) {
         }
 
         .row {
-    margin: 0;
-    padding: 0;
-}
-.align-items-center {
-    display: flex;
-    align-items: center;
-}
-.d-flex {
-    display: flex;
-}
-.justify-content-start {
-    justify-content: flex-start;
-}
+            margin: 0;
+            padding: 0;
+        }
+
+        .align-items-center {
+            display: flex;
+            align-items: center;
+        }
+
+        .d-flex {
+            display: flex;
+        }
+
+        .justify-content-start {
+            justify-content: flex-start;
+        }
     </style>
 </head>
 
-<body class=" d-flex flex-column">
+<body class="d-flex flex-column">
     <script src="./dist/js/demo-theme.min.js?1684106062"></script>
     <div class="page page-center" style='background: #04a41e;'>
         <div class="container container-tight py-4">
@@ -81,24 +84,16 @@ if (isset($_SESSION['dvsa_user_id'])) {
                         </div>
                     </div>
 
-                    <form action="" method="POST" id='frm_login'>
+                    <form action="core/forgot_password_handler.php" method="POST" id='frm_forgot_password'>
                         <div class="mb-3">
-                            <label class="form-label">Username</label>
-                            <input type="text" class="form-control" name="username" required placeholder="Your username" autocomplete="off">
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Password</label>
-                            <input type="password" class="form-control" name="password" required placeholder="Your password" autocomplete="off">
-                        </div>
-                        <div class="mb-3 form-check">
-                            <input type="checkbox" class="form-check-input" id="remember_me" name="remember_me">
-                            <label class="form-check-label" for="remember_me">Remember Me</label>
+                            <label class="form-label">Email Address</label>
+                            <input type="email" class="form-control" name="email" required placeholder="Your registered email" autocomplete="off">
                         </div>
                         <div class="form-footer">
-                            <button type="submit" class="btn btn-success w-100">Log in</button>
+                            <button type="submit" class="btn btn-success w-100">Submit</button>
                         </div>
                         <div class="text-center mt-3">
-                            <a href="forgot_password.php" class="text-muted">Forgot Password?</a>
+                            <a href="index.php" class="text-muted">Back to Login</a>
                         </div>
                     </form>
                 </div>
@@ -113,22 +108,19 @@ if (isset($_SESSION['dvsa_user_id'])) {
     <script src="dist/js/tabler.min.js?1684106062" defer></script>
     <script src="dist/js/demo.min.js?1684106062" defer></script>
     <script type="text/javascript">
-        $("#frm_login").submit(function(e) {
+        $("#frm_forgot_password").submit(function(e) {
             e.preventDefault();
             $.ajax({
                 type: "POST",
-                url: "core/login.php",
-                data: $("#frm_login").serialize(),
+                url: "core/forgot_password_handler.php",
+                data: $("#frm_forgot_password").serialize(),
                 success: function(data) {
-                    if (data == 1) {
-                        if ($("#remember_me").is(":checked")) {
-                            // Set cookie to remember user
-                            document.cookie = "remember_me=" + $("input[name='username']").val() + "; path=/; max-age=" + (30 * 24 * 60 * 60);
-                        }
-                        window.location = 'index.php';
-                    } else {
-                        alert(data);
-                    }
+                    Swal.fire({
+                        title: 'Password Reset',
+                        text: data,
+                        icon: 'info',
+                        confirmButtonText: 'OK'
+                    });
                 }
             });
         });

@@ -7,7 +7,7 @@
           Overview
         </div>
         <h2 class="page-title" style="color: #2fb344;">
-          Carlos Hilado Memorial State University
+       
         </h2>
       </div>
     </div>
@@ -118,10 +118,10 @@
           <div class="card-body">
             <div class="row align-items-center">
               <div class="col-10">
-                <h3 class="h1">System for Demerit Violation in Student Affairs</h3>
+                <!-- <h3 class="h1">System for Demerit Violation in Student Affairs</h3>
                 <div class="markdown text-muted">
                   Efficiently track and manage student conduct to maintain a fair and orderly campus environment.
-                </div>
+                </div> -->
               </div>
             </div>
           </div>

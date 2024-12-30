@@ -65,6 +65,8 @@ $user_id = $_SESSION['dvsa_user_id'];
             <a href=".">
               <img src="./static/chmsu.png" width="110" height="32" alt="Tabler" class="navbar-brand-image">
             </a>
+
+            Carlos Hilado Memorial State University
           </h1>
           <div class="navbar-nav flex-row order-md-last">
 
@@ -95,7 +97,7 @@ $user_id = $_SESSION['dvsa_user_id'];
                     <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
                   </svg></span>
                 <div class="d-none d-xl-block ps-2">
-                  <div><?= getUser($user_id) ?></div>
+                  <div><?= getUserFirstName($user_id) ?></div>
                   <div class="mt-1 small text-muted"><?= getUserCategory($user_id); ?></div>
                 </div>
               </a>

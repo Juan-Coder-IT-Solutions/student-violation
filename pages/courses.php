@@ -21,7 +21,7 @@
                             <div class="row g-2 align-items-center">
                                 <div class="col-6 col-sm-4 col-md-2 col-xl py-3">
                                     <a href="#" onclick="addEntry()" class="btn btn-primary w-100">
-                                        Add Entry
+                                        Add Courses
                                     </a>
                                 </div>
                                 <div class="col-6 col-sm-4 col-md-2 col-xl py-3">
@@ -36,10 +36,10 @@
                                 <table class="table align-items-center table-flush table-hover" id="dt_details">
                                     <thead class="thead-light">
                                         <tr>
-                                            <th>
+                                            <th style='width: 5px;'>
                                                 <div class='form-check form-check-success'><label class='form-check-label'><input type='checkbox' class='dt_id form-check-input' onchange="checkAll(this,'dt_id')"><i class='input-helper'></i></label></div>
                                             </th>
-                                            <th></th>
+                                            <th style='width: 5px;'></th>
                                             <th>#</th>
                                             <th>Course</th>
                                             <th>Date Added</th>

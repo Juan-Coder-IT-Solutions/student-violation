@@ -25,6 +25,21 @@ function getUser($user_id)
 	}
 }
 
+function getUserFirstName($user_id)
+{
+
+	global $mysqli_connect;
+
+	$fetchData = $mysqli_connect->query("SELECT * FROM `tbl_users` WHERE user_id = '$user_id'");
+	if ($fetchData->num_rows > 0) {
+
+		$row = $fetchData->fetch_array();
+		return $row['user_fname'];
+	} else {
+		return "---";
+	}
+}
+
 function getStudent($student_id)
 {
 
