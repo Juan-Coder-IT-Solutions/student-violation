@@ -1,93 +1,71 @@
--- phpMyAdmin SQL Dump
--- version 5.0.1
--- https://www.phpmyadmin.net/
---
--- Host: 127.0.0.1
--- Generation Time: May 27, 2024 at 01:00 PM
--- Server version: 10.4.11-MariaDB
--- PHP Version: 7.4.1
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
-SET time_zone = "+00:00";
-
+-- --------------------------------------------------------
+-- Host:                         127.0.0.1
+-- Server version:               10.4.11-MariaDB - mariadb.org binary distribution
+-- Server OS:                    Win64
+-- HeidiSQL Version:             12.1.0.6537
+-- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8 */;
+/*!50503 SET NAMES utf8mb4 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
---
--- Database: `student_violations_db`
---
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tbl_courses`
---
-
-CREATE TABLE `tbl_courses` (
-  `course_id` int(11) NOT NULL,
+-- Dumping structure for table student_violations_db.tbl_courses
+CREATE TABLE IF NOT EXISTS `tbl_courses` (
+  `course_id` int(11) NOT NULL AUTO_INCREMENT,
   `course_name` varchar(100) NOT NULL,
-  `date_added` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `date_added` datetime NOT NULL,
+  PRIMARY KEY (`course_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `tbl_courses`
---
-
+-- Dumping data for table student_violations_db.tbl_courses: ~2 rows (approximately)
 INSERT INTO `tbl_courses` (`course_id`, `course_name`, `date_added`) VALUES
-(2, 'Bachelor of Science in Information Technology', '2024-05-26 22:06:39'),
-(3, 'Bachelor of Science in Information System', '2024-05-26 22:06:48');
+	(2, 'Bachelor of Science in Information Technology', '2024-05-26 22:06:39'),
+	(3, 'Bachelor of Science in Information System', '2024-05-26 22:06:48');
 
--- --------------------------------------------------------
-
---
--- Table structure for table `tbl_offenses`
---
-
-CREATE TABLE `tbl_offenses` (
-  `offense_id` int(11) NOT NULL,
+-- Dumping structure for table student_violations_db.tbl_offenses
+CREATE TABLE IF NOT EXISTS `tbl_offenses` (
+  `offense_id` int(11) NOT NULL AUTO_INCREMENT,
   `student_id` int(11) NOT NULL,
+  `violation_id` int(11) NOT NULL,
   `offense_remarks` text NOT NULL,
   `offense_date` datetime NOT NULL DEFAULT current_timestamp(),
   `offense_status` varchar(1) NOT NULL COMMENT '1- cleared ; 0 - not cleared',
-  `date_added` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `date_added` datetime NOT NULL,
+  PRIMARY KEY (`offense_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `tbl_offenses`
---
+-- Dumping data for table student_violations_db.tbl_offenses: ~2 rows (approximately)
+INSERT INTO `tbl_offenses` (`offense_id`, `student_id`, `violation_id`, `offense_remarks`, `offense_date`, `offense_status`, `date_added`) VALUES
+	(9, 2, 1, '', '2025-01-20 00:00:00', '', '2025-01-20 14:26:40');
 
-INSERT INTO `tbl_offenses` (`offense_id`, `student_id`, `offense_remarks`, `offense_date`, `offense_status`, `date_added`) VALUES
-(1, 3, '', '2024-05-27 00:00:00', '1', '2024-05-27 11:09:52'),
-(2, 2, '', '2024-05-27 00:00:00', '', '2024-05-27 11:36:40'),
-(3, 2, '', '2024-05-27 00:00:00', '', '2024-05-27 11:39:26'),
-(4, 2, '', '2024-05-27 00:00:00', '', '2024-05-27 16:52:14');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tbl_offense_details`
---
-
-CREATE TABLE `tbl_offense_details` (
-  `od_id` int(11) NOT NULL,
+-- Dumping structure for table student_violations_db.tbl_offense_details
+CREATE TABLE IF NOT EXISTS `tbl_offense_details` (
+  `od_id` int(11) NOT NULL AUTO_INCREMENT,
   `offense_id` int(11) NOT NULL,
   `violation_id` int(11) NOT NULL,
-  `date_added` datetime NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `check_status` int(1) NOT NULL,
+  `date_added` datetime NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`od_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
 
--- --------------------------------------------------------
+-- Dumping data for table student_violations_db.tbl_offense_details: ~7 rows (approximately)
+INSERT INTO `tbl_offense_details` (`od_id`, `offense_id`, `violation_id`, `check_status`, `date_added`) VALUES
+	(1, 7, 1, 1, '2024-05-27 22:40:14'),
+	(2, 8, 1, 0, '2024-05-27 22:40:23'),
+	(3, 7, 4, 1, '2024-05-27 22:42:06'),
+	(4, 7, 3, 0, '2024-05-27 22:53:25'),
+	(5, 8, 2, 0, '2024-05-27 22:53:33'),
+	(6, 8, 4, 0, '2024-05-27 22:53:38'),
+	(7, 7, 2, 1, '2024-05-27 22:56:04');
 
---
--- Table structure for table `tbl_students`
---
-
-CREATE TABLE `tbl_students` (
-  `student_id` int(11) NOT NULL,
+-- Dumping structure for table student_violations_db.tbl_students
+CREATE TABLE IF NOT EXISTS `tbl_students` (
+  `student_id` int(11) NOT NULL AUTO_INCREMENT,
   `student_fname` varchar(50) NOT NULL,
   `student_mname` varchar(50) NOT NULL,
   `student_lname` varchar(50) NOT NULL,
@@ -95,146 +73,53 @@ CREATE TABLE `tbl_students` (
   `course_id` int(11) NOT NULL,
   `section` text NOT NULL,
   `user_id` int(11) NOT NULL,
-  `date_added` datetime NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `date_added` datetime NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`student_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `tbl_students`
---
-
+-- Dumping data for table student_violations_db.tbl_students: ~2 rows (approximately)
 INSERT INTO `tbl_students` (`student_id`, `student_fname`, `student_mname`, `student_lname`, `year_level`, `course_id`, `section`, `user_id`, `date_added`) VALUES
-(2, 'Mary Anne', 'Lastimosa', 'Cruz', 'Second Year', 2, 'A', 0, '2024-05-27 09:46:42'),
-(3, 'Pepe', 'Santos', 'Uy', 'First Year', 2, 'A', 5, '2024-05-27 10:14:05');
+	(2, 'Mary Anne', 'Lastimosa', 'Cruz', 'Second Year', 2, 'A', 0, '2024-05-27 09:46:42'),
+	(3, 'Pepe', 'Santos', 'Uy', 'First Year', 2, 'A', 5, '2024-05-27 10:14:05');
 
--- --------------------------------------------------------
-
---
--- Table structure for table `tbl_users`
---
-
-CREATE TABLE `tbl_users` (
-  `user_id` int(11) NOT NULL,
+-- Dumping structure for table student_violations_db.tbl_users
+CREATE TABLE IF NOT EXISTS `tbl_users` (
+  `user_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_fname` varchar(50) NOT NULL,
   `user_mname` varchar(50) NOT NULL,
   `user_lname` varchar(50) NOT NULL,
   `user_category` varchar(1) NOT NULL,
   `username` varchar(50) NOT NULL,
   `password` text NOT NULL,
-  `date_added` datetime DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `date_added` datetime DEFAULT current_timestamp(),
+  PRIMARY KEY (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `tbl_users`
---
-
+-- Dumping data for table student_violations_db.tbl_users: ~4 rows (approximately)
 INSERT INTO `tbl_users` (`user_id`, `user_fname`, `user_mname`, `user_lname`, `user_category`, `username`, `password`, `date_added`) VALUES
-(2, 'Juan', '', 'Dela Cruz', 'A', 'admin', '0cc175b9c0f1b6a831c399e269772661', '2024-05-26 19:56:25'),
-(3, 'Pepe', 'Santos', 'Uy', 'S', 'student', '0cc175b9c0f1b6a831c399e269772661', '2024-05-27 09:44:08'),
-(4, 'a', 'a', 'a', 'S', 'a', '0cc175b9c0f1b6a831c399e269772661', '2024-05-27 09:46:42'),
-(5, 'Pepe', 'Santos', 'Uy', 'S', 'student', '0cc175b9c0f1b6a831c399e269772661', '2024-05-27 10:14:05');
+	(2, 'Juan', '', 'Dela Cruz', 'A', 'admin', '0cc175b9c0f1b6a831c399e269772661', '2024-05-26 19:56:25'),
+	(3, 'Pepe', 'Santos', 'Uy', 'S', 'student', '0cc175b9c0f1b6a831c399e269772661', '2024-05-27 09:44:08'),
+	(4, 'a', 'a', 'a', 'S', 'a', '0cc175b9c0f1b6a831c399e269772661', '2024-05-27 09:46:42'),
+	(5, 'Pepe', 'Santos', 'Uy', 'S', 'student', '0cc175b9c0f1b6a831c399e269772661', '2024-05-27 10:14:05');
 
--- --------------------------------------------------------
-
---
--- Table structure for table `tbl_violations`
---
-
-CREATE TABLE `tbl_violations` (
-  `violation_id` int(11) NOT NULL,
+-- Dumping structure for table student_violations_db.tbl_violations
+CREATE TABLE IF NOT EXISTS `tbl_violations` (
+  `violation_id` int(11) NOT NULL AUTO_INCREMENT,
   `violation_name` varchar(100) NOT NULL,
   `violation_desc` text NOT NULL,
-  `date_added` datetime NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `date_added` datetime NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`violation_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `tbl_violations`
---
-
+-- Dumping data for table student_violations_db.tbl_violations: ~4 rows (approximately)
 INSERT INTO `tbl_violations` (`violation_id`, `violation_name`, `violation_desc`, `date_added`) VALUES
-(2, 'Cheating', '', '2024-05-26 22:15:55'),
-(3, 'Truancy', 'Skipping classes without a valid reason.\r\nExcessive tardiness.\r\nConsequences: Detention, parental notification, loss of privileges, in-school suspension.', '2024-05-26 22:16:21');
+	(1, 'Improper wearing of uniform', '', '2024-05-27 21:45:44'),
+	(2, 'Gambling within the school and its immediate vicinity', '', '2024-05-27 21:46:32'),
+	(3, 'Smoking inside the school', '', '2024-05-27 21:47:05'),
+	(4, 'Theft of school properties', '', '2024-05-27 21:47:40');
 
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `tbl_courses`
---
-ALTER TABLE `tbl_courses`
-  ADD PRIMARY KEY (`course_id`);
-
---
--- Indexes for table `tbl_offenses`
---
-ALTER TABLE `tbl_offenses`
-  ADD PRIMARY KEY (`offense_id`);
-
---
--- Indexes for table `tbl_offense_details`
---
-ALTER TABLE `tbl_offense_details`
-  ADD PRIMARY KEY (`od_id`);
-
---
--- Indexes for table `tbl_students`
---
-ALTER TABLE `tbl_students`
-  ADD PRIMARY KEY (`student_id`);
-
---
--- Indexes for table `tbl_users`
---
-ALTER TABLE `tbl_users`
-  ADD PRIMARY KEY (`user_id`);
-
---
--- Indexes for table `tbl_violations`
---
-ALTER TABLE `tbl_violations`
-  ADD PRIMARY KEY (`violation_id`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `tbl_courses`
---
-ALTER TABLE `tbl_courses`
-  MODIFY `course_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT for table `tbl_offenses`
---
-ALTER TABLE `tbl_offenses`
-  MODIFY `offense_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT for table `tbl_offense_details`
---
-ALTER TABLE `tbl_offense_details`
-  MODIFY `od_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `tbl_students`
---
-ALTER TABLE `tbl_students`
-  MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT for table `tbl_users`
---
-ALTER TABLE `tbl_users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT for table `tbl_violations`
---
-ALTER TABLE `tbl_violations`
-  MODIFY `violation_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-COMMIT;
-
+/*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
+/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
+/*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=IFNULL(@OLD_SQL_NOTES, 1) */;

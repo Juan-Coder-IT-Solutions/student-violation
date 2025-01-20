@@ -11,6 +11,8 @@
 		require view.'students.php';
 	}else if($page == 'offenses'){
 		require view.'offenses.php';
+	}else if($page == 'profile'){
+		require view.'profile.php';
 	}else{
 		if(!empty($page) or $page != $page){
 			require './404.php';

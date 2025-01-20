@@ -1,62 +1,62 @@
 <div class="page-wrapper">
-    <!-- Page header -->
-    <div class="page-header d-print-none">
-        <div class="container-xl">
-            <div class="row g-2 align-items-center">
-                <div class="col">
-                    <h2 class="page-title">
-                        Offenses
-                    </h2>
-                </div>
-            </div>
+  <!-- Page header -->
+  <div class="page-header d-print-none">
+    <div class="container-xl">
+      <div class="row g-2 align-items-center">
+        <div class="col">
+          <h2 class="page-title">
+            Offenses
+          </h2>
         </div>
+      </div>
     </div>
-    <!-- Page body -->
-    <div class="page-body">
-        <div class="container-xl">
-            <div class="row row-cards">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="row g-2 align-items-center">
-                                <div class="col-6 col-sm-4 col-md-2 col-xl py-3">
-                                    <a href="#" onclick="addEntry()" class="btn btn-primary w-100">
-                                        Add Offenses
-                                    </a>
-                                </div>
-                                <div class="col-6 col-sm-4 col-md-2 col-xl py-3">
-                                    <a href="#" onclick="deleteEntry()" id="btn_delete" class="btn btn-danger w-100">
-                                        Delete
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table align-items-center table-flush table-hover" id="dt_details">
-                                    <thead class="thead-light">
-                                        <tr>
-                                            <th  style='width: 5px;'>
-                                                <div class='form-check form-check-success'><label class='form-check-label'><input type='checkbox' class='dt_id form-check-input' onchange="checkAll(this,'dt_id')"><i class='input-helper'></i></label></div>
-                                            </th  style='width: 5px;'>
-                                            <th></th>
-                                            <th>#</th>
-                                            <th>Student Name</th>
-                                            <th>Violation</th>
-                                            <th>Remarks</th>
-                                            <th>Date</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
+  </div>
+  <!-- Page body -->
+  <div class="page-body">
+    <div class="container-xl">
+      <div class="row row-cards">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+              <div class="row g-2 align-items-center">
+                <div class="col-6 col-sm-4 col-md-2 col-xl py-3">
+                  <a href="#" onclick="addEntry()" class="btn btn-primary w-100">
+                    Add Offenses
+                  </a>
                 </div>
+                <div class="col-6 col-sm-4 col-md-2 col-xl py-3">
+                  <a href="#" onclick="deleteEntry()" id="btn_delete" class="btn btn-danger w-100">
+                    Delete
+                  </a>
+                </div>
+              </div>
             </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table align-items-center table-flush table-hover" id="dt_details">
+                  <thead class="thead-light">
+                    <tr>
+                      <th style='width: 5px;'>
+                        <div class='form-check form-check-success'><label class='form-check-label'><input type='checkbox' class='dt_id form-check-input' onchange="checkAll(this,'dt_id')"><i class='input-helper'></i></label></div>
+                      </th style='width: 5px;'>
+                      <th></th>
+                      <th>#</th>
+                      <th>Student Name</th>
+                      <th>Violation</th>
+                      <th>Remarks</th>
+                      <th>Date</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </div>
 <?php require_once 'modals/modal_offenses.php'; ?>
 <script>
@@ -136,7 +136,7 @@
         var json = JSON.parse(data);
         console.log(data);
         $("#student_id").val(json.student_id);
-        // $("#violation_id").val(json.violation_id);
+        $("#violation_id").val(json.violation_id);
         $("#offense_remarks").val(json.offense_remarks);
         $("#offense_date").val(json.offense_date);
         // $("#offense_status").val(json.offense_status);
@@ -199,8 +199,7 @@
           //type:type
         }
       },
-      "columns": [
-        {
+      "columns": [{
           "mRender": function(data, type, row) {
             return "<div class='form-check form-check-success'><label class='form-check-label'><input type='checkbox' value=" + row.offense_id + " class='dt_id form-check-input'><i class='input-helper'></i></label></div>";
           }
