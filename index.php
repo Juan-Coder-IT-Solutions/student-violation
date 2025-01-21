@@ -115,9 +115,10 @@ $user_id = $_SESSION['dvsa_user_id'];
       </header>
       <header class="navbar-expand-md">
         <div class="collapse navbar-collapse" id="navbar-menu">
+          
+        <?php if ($_SESSION['user_category'] != "S") { ?>
           <div class="navbar">
             <div class="container-xl">
-
               <?php include "components/navbar.php"; ?>
 
               <div class="my-2 my-md-0 flex-grow-1 flex-md-grow-0 order-first order-md-last">
@@ -125,6 +126,8 @@ $user_id = $_SESSION['dvsa_user_id'];
               </div>
             </div>
           </div>
+          
+          <?php }?>
         </div>
       </header>
     </div>
