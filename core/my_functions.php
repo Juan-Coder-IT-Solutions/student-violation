@@ -55,14 +55,35 @@ function getStudent($student_id)
 	}
 }
 
+function getStudentRow($student_id)
+{
+
+	global $mysqli_connect;
+
+	$fetchData = $mysqli_connect->query("SELECT * FROM `tbl_students` WHERE student_id = '$student_id'");
+	if ($fetchData->num_rows > 0) {
+
+		$row = $fetchData->fetch_array();
+		return $row;
+	} else {
+		return "";
+	}
+}
+
+
+
 function getUserCategory($user_id)
 {
 
 	global $mysqli_connect;
 
 	$fetchData = $mysqli_connect->query("SELECT user_category FROM `tbl_users` WHERE user_id = '$user_id'");
+	if($fetchData->num_rows == 0){
+		return "---";
+	}else {
 	$row = $fetchData->fetch_assoc();
 	return $row['user_category'] == "A" ? "Admin" : "Student";
+	}
 }
 
 function course_name($id)

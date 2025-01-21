@@ -135,7 +135,7 @@ if ($_SESSION['user_category'] != "S") {
   </div>
 
 <?php } else { ?>
-  <?php require_once '/student_dashboad.php'; ?>
+  <?php require_once 'student_dashboad.php'; ?>
 
 
 <?php } ?>

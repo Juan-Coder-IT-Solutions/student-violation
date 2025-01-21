@@ -45,6 +45,7 @@
                       <th>Violation</th>
                       <th>Remarks</th>
                       <th>Status</th>
+                      <th>Cleared By</th>
                       <th>Date</th>
                     </tr>
                   </thead>
@@ -60,6 +61,7 @@
   </div>
 </div>
 <?php require_once 'modals/modal_offenses.php'; ?>
+<?php require_once 'modals/modal_clearance.php'; ?>
 <script>
   $(document).ready(function() {
     getEntry();
@@ -79,7 +81,7 @@
       },
       function(isConfirm) {
         if (isConfirm) {
-          
+
 
           $.ajax({
             type: "POST",
@@ -186,8 +188,6 @@
     });
   }
 
-
-
   $("#frm_add").submit(function(e) {
     e.preventDefault();
     $("#btn_submit_entry").prop("disabled", true);
@@ -247,7 +247,7 @@
           "mRender": function(data, type, row) {
             var c_btn = row.offense_status == 1 ? 'display:none;' : '';
             var p_btn = row.offense_status == 1 ? '' : 'display:none;';
-            return "<center><button class='btn btn-primary' onclick='getEntryDetails(" + row.offense_id + ")'><span class='mdi mdi-grease-pencil'></span></button><button class='btn btn-warning' style='"+c_btn+"' onclick='clearOffense(" + row.offense_id + ")'><span class='mdi mdi-checkbox-marked-circle-outline'></span></button><button class='btn btn-secondary' style='"+p_btn+"' onclick='clearOffense(" + row.offense_id + ")'><span class='mdi mdi-printer'></span></button></center>";
+            return "<center><button class='btn btn-primary' onclick='getEntryDetails(" + row.offense_id + ")'><span class='mdi mdi-grease-pencil'></span></button><button class='btn btn-warning' style='" + c_btn + "' onclick='clearOffense(" + row.offense_id + ")'><span class='mdi mdi-checkbox-marked-circle-outline'></span></button><button class='btn btn-secondary' style='" + p_btn + "' onclick='offenseFormModal(" + row.offense_id + ")'><span class='mdi mdi-printer'></span></button></center>";
           }
         },
         {
@@ -266,9 +266,41 @@
           "data": "status"
         },
         {
+          "data": "cleared_by"
+        },
+        {
           "data": "offense_date"
         }
       ]
+    });
+
+  }
+
+  function offenseFormModal(id) {
+    $("#offenseFormModal").modal("show");
+
+    $.ajax({
+      type: "POST",
+      url: "ajax/getClearance.php",
+      data: {
+        id: id
+      },
+      success: function(data) {
+        var json = JSON.parse(data);
+        console.log(json);
+        $("#student_name").html(json.student_name);
+        $("#student_course").html(json.student_course);
+        $("#year_level").html(json.year_level);
+        $("#student_email").html(json.student_email);
+
+        
+        $("#c_offense_desc").html(json.offense_remarks);
+        $("#c_violation").html(json.violation);
+        $("#c_discplinary_action").html(json.discplinary_action);
+        $("#offense_date").html(json.offense_date);
+        $("#offense_status").html(json.offense_status);
+        $("#cleared_by").html(json.cleared_by);
+      }
     });
 
   }

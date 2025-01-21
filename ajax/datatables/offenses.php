@@ -15,6 +15,7 @@ while( $row = $fetch_products->fetch_array() ){
     $list['offense_date'] = date('F d,Y', strtotime($row['offense_date']));
     $list['date_added'] = date('F d,Y', strtotime($row['date_added']));
     $list['offense_status'] = $row['offense_status'];
+    $list['cleared_by'] = $row['cleared_by'] > 0 ? getUser($row['cleared_by']) : "---";
 	array_push($response['data'], $list);
 }
 
