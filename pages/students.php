@@ -29,6 +29,11 @@
                                         Delete
                                     </a>
                                 </div>
+                                <div class="col-6 col-sm-4 col-md-2 col-xl py-3">
+                                    <a href="#" onclick="importCSVFile()" class="btn btn-success w-100">
+                                        Import csv file
+                                    </a>
+                                </div>
                             </div>
                         </div>
                         <div class="card-body">
@@ -45,6 +50,7 @@
                                             <th>Course</th>
                                             <th>Year Level</th>
                                             <th>Section</th>
+                                            <th>Email</th>
                                             <th>Date Added</th>
                                         </tr>
                                     </thead>
@@ -60,10 +66,15 @@
     </div>
 </div>
 <?php require_once 'modals/modal_students.php'; ?>
+<?php require_once 'modals/modal_import_students.php'; ?>
 <script>
   $(document).ready(function() {
     getEntry();
   });
+
+  function importCSVFile(){
+    $("#modal_import_students").modal("show");
+  }
 
   function deleteEntry() {
     var count_checked = $(".dt_id:checked").length;
@@ -142,6 +153,7 @@
         $("#course_id").val(json.course_id);
         $("#year_level").val(json.year_level);
         $("#section").val(json.section);
+        $("#student_email").val(json.student_email);
 
         $('.user_input').removeAttr('required');
         
@@ -229,6 +241,9 @@
         },
         {
           "data": "section"
+        },
+        {
+          "data": "student_email"
         },
         {
           "data": "date_added"

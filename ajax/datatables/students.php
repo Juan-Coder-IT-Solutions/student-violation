@@ -13,6 +13,7 @@ while( $row = $fetch->fetch_array() ){
     $list['section'] = $row['section'];
     $list['year_level'] = $row['year_level'];
     $list['full_name'] = $row['student_fname']." ".$row['student_mname']." ".$row['student_lname'];
+    $list['student_email'] = $row['student_email'];
     $list['date_added'] = date('F d,Y', strtotime($row['date_added']));
 	array_push($response['data'], $list);
 }

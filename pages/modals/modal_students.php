@@ -30,6 +30,12 @@
             </div>
             <div class="col-sm-12">
               <div class="mb-3">
+                <label class="form-label">Email <strong style="color:red;">*</strong></label>
+                <input type="email" class="form-control" id="student_email" name="student_email" autocomplete="off" required>
+              </div>
+            </div>
+            <div class="col-sm-12">
+              <div class="mb-3">
                 <label class="form-label">Course <strong style="color:red;">*</strong></label>
                 <select class="select2 form-control" id="course_id" name="course_id" required>
                     <option value="">Please Select</option>

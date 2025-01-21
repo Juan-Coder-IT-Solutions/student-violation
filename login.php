@@ -23,6 +23,7 @@ if (isset($_SESSION['dvsa_user_id'])) {
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Sign in - CHMSU</title>
     <!-- CSS files -->
+    <link rel="icon" type="image/x-icon" href="./static/chmsu.png">
     <link href="./dist/css/tabler.min.css?1684106062" rel="stylesheet" />
     <link href="./dist/css/tabler-flags.min.css?1684106062" rel="stylesheet" />
     <link href="./dist/css/tabler-payments.min.css?1684106062" rel="stylesheet" />
