@@ -44,6 +44,7 @@
                       <th>Student Name</th>
                       <th>Violation</th>
                       <th>Remarks</th>
+                      <th>Status</th>
                       <th>Date</th>
                     </tr>
                   </thead>
@@ -63,6 +64,44 @@
   $(document).ready(function() {
     getEntry();
   });
+
+  function clearOffense(id) {
+    swal({
+        title: "Are you sure?",
+        text: "You will not be able to recover these entries!",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonClass: "btn-info",
+        confirmButtonText: "Yes, make it cleared!",
+        cancelButtonText: "No, cancel!",
+        closeOnConfirm: false,
+        closeOnCancel: false
+      },
+      function(isConfirm) {
+        if (isConfirm) {
+          
+
+          $.ajax({
+            type: "POST",
+            url: "ajax/clearOffense.php",
+            data: {
+              offense_id: id
+            },
+            success: function(data) {
+              if (data == 1) {
+                success_update();
+                getEntry();
+              } else {
+                failed_query("Offenses");
+              }
+            }
+          });
+
+        } else {
+          swal("Cancelled", "Entries are safe :)", "error");
+        }
+      });
+  }
 
   function deleteEntry() {
     var count_checked = $(".dt_id:checked").length;
@@ -206,7 +245,9 @@
         },
         {
           "mRender": function(data, type, row) {
-            return "<center><button class='btn btn-primary' onclick='getEntryDetails(" + row.offense_id + ")'><span class='mdi mdi-grease-pencil'></span></button></center>";
+            var c_btn = row.offense_status == 1 ? 'display:none;' : '';
+            var p_btn = row.offense_status == 1 ? '' : 'display:none;';
+            return "<center><button class='btn btn-primary' onclick='getEntryDetails(" + row.offense_id + ")'><span class='mdi mdi-grease-pencil'></span></button><button class='btn btn-warning' style='"+c_btn+"' onclick='clearOffense(" + row.offense_id + ")'><span class='mdi mdi-checkbox-marked-circle-outline'></span></button><button class='btn btn-secondary' style='"+p_btn+"' onclick='clearOffense(" + row.offense_id + ")'><span class='mdi mdi-printer'></span></button></center>";
           }
         },
         {
@@ -220,6 +261,9 @@
         },
         {
           "data": "offense_remarks"
+        },
+        {
+          "data": "status"
         },
         {
           "data": "offense_date"
