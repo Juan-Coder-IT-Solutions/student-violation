@@ -180,7 +180,7 @@
         $("#violation_id").val(json.violation_id);
         $("#offense_remarks").val(json.offense_remarks);
         $("#offense_date").val(json.offense_date);
-        // $("#offense_status").val(json.offense_status);
+        $("#discplinary_action").val(json.discplinary_action);
 
         $("#offense_id").val(json.offense_id);
         $(".modal_type").val("update");
