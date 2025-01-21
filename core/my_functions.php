@@ -19,7 +19,22 @@ function getUser($user_id)
 	if ($fetchData->num_rows > 0) {
 
 		$row = $fetchData->fetch_array();
-		return $row['user_fname'] . " " . $row['user_fname'] . " " . $row['user_fname'];
+		return $row['user_fname'] . " " . $row['user_mname'] . " " . $row['user_lname'];
+	} else {
+		return "---";
+	}
+}
+
+
+function getUsername($user_id)
+{
+
+	global $mysqli_connect;
+
+	$fetchData = $mysqli_connect->query("SELECT username FROM `tbl_users` WHERE user_id = '$user_id'");
+	if ($fetchData->num_rows > 0) {
+		$row = $fetchData->fetch_array();
+		return $row['username'];
 	} else {
 		return "---";
 	}
@@ -180,3 +195,26 @@ function total_offenses()
 
 	return $row[0];
 }
+
+function timeAgoFromDatetime($datetime) {
+    $timeAgo = strtotime(getCurrentDate()) - strtotime($datetime); // Calculate the time difference in seconds
+
+    // Determine the time unit and its value
+    if ($timeAgo < 60) {
+        return $timeAgo . " seconds ago";
+    } elseif ($timeAgo < 3600) {
+        return floor($timeAgo / 60) . " minutes ago";
+    } elseif ($timeAgo < 86400) {
+        return floor($timeAgo / 3600) . " hours ago";
+    } elseif ($timeAgo < 604800) {
+        return floor($timeAgo / 86400) . " days ago";
+    } elseif ($timeAgo < 2592000) {
+        return floor($timeAgo / 604800) . " weeks ago";
+    } elseif ($timeAgo < 31536000) {
+        return floor($timeAgo / 2592000) . " months ago";
+    } else {
+        return floor($timeAgo / 31536000) . " years ago";
+    }
+
+}
+

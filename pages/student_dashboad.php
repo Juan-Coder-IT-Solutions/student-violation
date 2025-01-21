@@ -1,44 +1,25 @@
-<div class="page-body">
-    <div class="container-xl">
-      <div class="row row-deck row-cards">
+<?php
+$fetch_student = $mysqli_connect->query("SELECT * FROM tbl_students WHERE user_id = '$user_id'") or die(mysqli_error());
+$row = $fetch_student->fetch_array();
+?>
+<div class="page-wrapper">
+  <div class="page-header">
+    <div class="container">
+      <div class="row align-items-center">
         <div class="col-12">
-          <div class="card card-md shadow-lg" style="border: none; background: #fff; border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
-            <div class="card-header text-center py-4" style="background-color: #f8f9fa; padding: 30px; border-radius: 15px 15px 0 0;">
-              <img src="./static/chmsu.png" alt="University Logo" class="img-fluid mb-3" style="max-width: 150px;">
-              <h3 class="h2" style="font-weight: 700; font-size: 2rem; color: #007bff;">Student Dashboard</h3>
-              <p class="text-muted" style="color: #888;">Welcome to your personalized student portal.</p>
-            </div>
-            <div class="card-body" style="padding: 30px;">
-              <!-- Student Information Section -->
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="info-card shadow-sm mb-4 rounded-lg p-4" style="background-color: #f9f9f9; border-radius: 12px; transition: all 0.3s ease-in-out; border: 1px solid #ddd;">
-                    <h5 class="card-title" style="font-size: 1.3rem; font-weight: 600; color: #333;">Name:</h5>
-                    <p class="card-text" style="font-size: 1rem; color: #555;">John Doe</p>
-                  </div>
-                  <div class="info-card shadow-sm mb-4 rounded-lg p-4" style="background-color: #f9f9f9; border-radius: 12px; transition: all 0.3s ease-in-out; border: 1px solid #ddd;">
-                    <h5 class="card-title" style="font-size: 1.3rem; font-weight: 600; color: #333;">Course:</h5>
-                    <p class="card-text" style="font-size: 1rem; color: #555;">Bachelor of Science in Information Technology</p>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="info-card shadow-sm mb-4 rounded-lg p-4" style="background-color: #f9f9f9; border-radius: 12px; transition: all 0.3s ease-in-out; border: 1px solid #ddd;">
-                    <h5 class="card-title" style="font-size: 1.3rem; font-weight: 600; color: #333;">Year:</h5>
-                    <p class="card-text" style="font-size: 1rem; color: #555;">3rd Year</p>
-                  </div>
-                  <div class="info-card shadow-sm mb-4 rounded-lg p-4" style="background-color: #f9f9f9; border-radius: 12px; transition: all 0.3s ease-in-out; border: 1px solid #ddd;">
-                    <h5 class="card-title" style="font-size: 1.3rem; font-weight: 600; color: #333;">Section:</h5>
-                    <p class="card-text" style="font-size: 1rem; color: #555;">Section A</p>
-                  </div>
-                </div>
+          <div class="card card-md">
+            <div class="card-stamp card-stamp-lg">
+              <div class="card-stamp-icon bg-primary">
+                <img src="./static/chmsu.png">
               </div>
-              <!-- End of Student Information Section -->
-
-              <!-- Additional Information or Actions -->
-              <div class="text-center mt-5">
-                <a href="#action-link" class="btn btn-primary btn-lg" style="background-color: #007bff; border-color: #007bff; padding: 15px 30px; font-size: 1.1rem; text-decoration: none; color: white; border-radius: 8px; transition: background-color 0.3s ease, transform 0.3s ease;">
-                  View Violations & Activities
-                </a>
+            </div>
+            <div class="card-body">
+              <div class="row align-items-center">
+                <div class="col-10">
+                  <h1 class="fw-bold">Welcome, <strong style="color:orange"><?= strtoupper(getUsername($user_id)) ?>!</strong></h1>
+                  <div class="my-2"><?= $row['student_email']  ?>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -46,55 +27,138 @@
       </div>
     </div>
   </div>
+  <!-- Page body -->
+  <div class="page-body">
+    <div class="container-xl">
+      <div class="row g-3">
 
-  <!-- Responsive Design in Style -->
-  <style>
-    /* Card hover effect */
-    .info-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    }
+        <div class="col-lg-6">
+          <div class="row row-cards">
+            <div class="col-12">
+              <div class="card">
+                <div class="card-body">
+                  <div class="card-title">Student Information</div>
 
-    /* Responsive Layout Adjustments */
-    @media (max-width: 768px) {
-      .card-body {
-        padding: 20px;
-      }
+                  <div class="mb-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon me-2 text-muted" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-user">
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                      <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
+                      <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+                    </svg>
+                    Fullname: <strong><?= $row['student_fname'] . " " . $row['student_mname'] . " " . $row['student_lname'] ?></strong>
+                  </div>
 
-      .info-card {
-        margin-bottom: 20px;
-      }
+                  <div class="mb-2">
+                    <!-- Download SVG icon from http://tabler-icons.io/i/book -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon me-2 text-muted" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                      <path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"></path>
+                      <path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"></path>
+                      <path d="M3 6l0 13"></path>
+                      <path d="M12 6l0 13"></path>
+                      <path d="M21 6l0 13"></path>
+                    </svg>
+                    Course: <strong> <?= course_name($row['course_id']) ?></strong>
+                  </div>
+                  <div class="mb-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon me-2 text-muted" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-books">
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                      <path d="M5 4m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v14a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" />
+                      <path d="M9 4m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v14a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" />
+                      <path d="M5 8h4" />
+                      <path d="M9 16h4" />
+                      <path d="M13.803 4.56l2.184 -.53c.562 -.135 1.133 .19 1.282 .732l3.695 13.418a1.02 1.02 0 0 1 -.634 1.219l-.133 .041l-2.184 .53c-.562 .135 -1.133 -.19 -1.282 -.732l-3.695 -13.418a1.02 1.02 0 0 1 .634 -1.219l.133 -.041z" />
+                      <path d="M14 9l4 -1" />
+                      <path d="M16 16l3.923 -.98" />
+                    </svg>
+                    Year and section: <strong><?= $row['year_level'] . " - " . $row['section'] ?></strong>
+                  </div>
+                  <div class="mb-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon me-2 text-muted" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-mail-spark">
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                      <path d="M19 22.5a4.75 4.75 0 0 1 3.5 -3.5a4.75 4.75 0 0 1 -3.5 -3.5a4.75 4.75 0 0 1 -3.5 3.5a4.75 4.75 0 0 1 3.5 3.5" />
+                      <path d="M11.5 19h-6.5a2 2 0 0 1 -2 -2v-10a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v5" />
+                      <path d="M3 7l9 6l9 -6" />
+                    </svg>
+                    Email: <strong><?= $row['student_email'] ?></strong>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <ul class="timeline">
+            <?php
+            $fetchOffense = $mysqli_connect->query("SELECT * FROM tbl_offenses WHERE student_id = '$user_id' ORDER BY offense_id ASC") or die(mysqli_error());
 
-      .text-center {
-        text-align: left;
-      }
+            // Check if there are any offenses
+            if ($fetchOffense->num_rows > 0) {
+              while ($offense_row = $fetchOffense->fetch_array()) {
+                $status_style = $offense_row['offense_status'] == 1 ? "color: #0277BD !important;background-color: #90CAF9 !important;" : "color: #FF5722 !important;background-color: #FFCCBC !important;";
+            ?>
+                <li class="timeline-event">
+                  <div class="timeline-event-icon bg-twitter-lt" style="<?= $status_style ?>">
+                    <?php
+                    if ($offense_row['offense_status'] == 1) {
+                    ?>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-checks">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <path d="M7 12l5 5l10 -10" />
+                        <path d="M2 12l5 5m5 -5l5 -5" />
+                      </svg>
+                    <?php } else { ?>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-circle-dashed-x">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <path d="M8.56 3.69a9 9 0 0 0 -2.92 1.95" />
+                        <path d="M3.69 8.56a9 9 0 0 0 -.69 3.44" />
+                        <path d="M3.69 15.44a9 9 0 0 0 1.95 2.92" />
+                        <path d="M8.56 20.31a9 9 0 0 0 3.44 .69" />
+                        <path d="M15.44 20.31a9 9 0 0 0 2.92 -1.95" />
+                        <path d="M20.31 15.44a9 9 0 0 0 .69 -3.44" />
+                        <path d="M20.31 8.56a9 9 0 0 0 -1.95 -2.92" />
+                        <path d="M15.44 3.69a9 9 0 0 0 -3.44 -.69" />
+                        <path d="M14 14l-4 -4" />
+                        <path d="M10 14l4 -4" />
+                      </svg>
+                    <?php } ?>
+                  </div>
+                  <div class="card timeline-event-card">
+                    <div class="card-body">
+                      <div class="text-muted float-end"><?= timeAgoFromDatetime($offense_row['date_added']) ?></div>
+                      <h4><?= violation_name($offense_row['violation_id']) ?></h4>
+                      <p class="text-muted">
+                        <strong>Offense Description:</strong> <?= $offense_row['offense_remarks'] ?><br>
+                        <strong>Disciplinary Action Taken:</strong><br>
+                        <strong>Date of Offense:</strong> <?= date('F d, Y', strtotime($offense_row['offense_date'])) ?><br>
+                        <strong>Cleared By:</strong> <?= $offense_row['cleared_by'] > 0 ? getUser($offense_row['cleared_by']) : "---"; ?><br>
 
-      .btn-primary {
-        width: 100%;
-        padding: 15px;
-        font-size: 1.2rem;
-      }
-    }
+                        <strong>Status:</strong> <?= $offense_row['offense_status'] == 1 ? "<b style='color:green'>CLEARED</b>" : "<i style='color:orange'>NOT-CLEARED</i>"; ?><br>
+                      </p>
+                    </div>
+                  </div>
+                </li>
 
-    @media (max-width: 576px) {
-      .card-header {
-        padding: 20px;
-      }
+            <?php
+              }
+            } else {
+              // If no offenses are found
+              echo "<li class='timeline-event'>
+              <div class='card timeline-event-card'>
+                <div class='card-body'>
+                  <p class='text-muted'>
+                    <h2 style='color:#4CAF50;'><strong>No offenses found for this student.</strong><br><br></h2>
+                    It appears that the student has maintained a clean record and has not committed any violations or offenses. Continue to uphold the standards of behavior and responsibility.
+                  </p>
+                </div>
+              </div>
+            </li>";
+            }
+            ?>
+          </ul>
+        </div>
 
-      .card-title {
-        font-size: 1.5rem;
-      }
-
-      .card-text {
-        font-size: 0.9rem;
-      }
-
-      .info-card {
-        padding: 15px;
-      }
-
-      .btn-primary {
-        font-size: 1.1rem;
-      }
-    }
-  </style>
+      </div>
+    </div>
+  </div>
+</div>

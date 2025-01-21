@@ -3,8 +3,8 @@
     <div class="row g-2 align-items-center">
       <div class="col">
         <!-- Page pre-title -->
-        <div class="page-pretitle">
-          Overview
+        <div class="page-pretitle" style="color: #2fb344;">
+           <?= $_SESSION['user_category'] != "S" ? "Overview" : "Student Portal" ?>
         </div>
         <h2 class="page-title" style="color: #2fb344;">
 
@@ -125,6 +125,7 @@ if ($_SESSION['user_category'] != "S") {
                 <div class="markdown text-muted">
                   Efficiently track and manage student conduct to maintain a fair and orderly campus environment.
                 </div> -->
+                <h1 class="fw-bold">Welcome, <strong style="color:orange"><?= strtoupper(getUsername($user_id)) ?>!</strong></h1>
                 </div>
               </div>
             </div>

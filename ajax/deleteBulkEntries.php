@@ -20,6 +20,11 @@ if(isset($_POST['id'])){
 		// }
 
 		$sql = $mysqli_connect->query("DELETE FROM $table WHERE $keyword='$values' ") or die(mysqli_error());
+
+		if($table == "tbl_users"){
+			$mysqli_connect->query("DELETE FROM tbl_students WHERE user_id='$values'") or die(mysqli_error());
+		}
+	
 		
 	}
 

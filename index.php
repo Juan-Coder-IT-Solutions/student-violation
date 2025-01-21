@@ -145,9 +145,9 @@ $user_id = $_SESSION['dvsa_user_id'];
             <div class="col-12 col-lg-auto mt-3 mt-lg-0">
               <ul class="list-inline list-inline-dots mb-0">
                 <li class="list-inline-item">
-                  Copyright &copy; 2024
+                  Copyright &copy; <?php echo date('Y'); ?>
                   <a href="." class="link-secondary">CHMSU-Alijis</a>.
-                  All rights reserved.
+                  All rights reserved. 
                 </li>
               </ul>
             </div>
