@@ -9,6 +9,8 @@
 		require view.'violations.php';
 	}else if($page == 'violation-report'){
 		require view.'violation_report.php';
+	}else if($page == 'student-violation-report'){
+		require view.'student_violation_report.php';
 	}else if($page == 'students'){
 		require view.'students.php';
 	}else if($page == 'offenses'){

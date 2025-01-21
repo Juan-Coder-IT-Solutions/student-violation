@@ -29,11 +29,22 @@
                                         Delete
                                     </a>
                                 </div>
-                                <div class="col-6 col-sm-4 col-md-2 col-xl py-3">
-                                    <a href="#" onclick="importCSVFile()" class="btn btn-success w-100">
-                                        Import csv file
-                                    </a>
+                                <div class="col-6 col-sm-6 col-md-2 col-xl py-3  w-100">
+                                    <div class="dropdown w-100">
+                                        <button class="btn btn-success dropdown-toggle w-100" type="button" id="csvActionsDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                            CSV Actions
+                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="csvActionsDropdown">
+                                            <li>
+                                                <a class="dropdown-item" href="#" onclick="importCSVFile()">Import CSV File</a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item" href="#" onclick="downloadCsvFormat()">Download Format</a>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </div>
+
                             </div>
                         </div>
                         <div class="card-body">
@@ -71,6 +82,31 @@
   $(document).ready(function() {
     getEntry();
   });
+
+  function downloadCsvFormat() {
+    // Define the CSV content
+    const csvContent = [
+      ["Firstname", "Middlename", "Lastname", "Section", "Email", "Username", "Password"]
+    ];
+
+    // Convert array to CSV string
+    const csvString = csvContent.map(row => row.join(",")).join("\n");
+
+    // Create a Blob object for the CSV data
+    const blob = new Blob([csvString], { type: "text/csv" });
+
+    // Create a link element for download
+    const downloadLink = document.createElement("a");
+    downloadLink.href = URL.createObjectURL(blob);
+    downloadLink.download = "students_format.csv";
+
+    // Trigger the download
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+
+    // Clean up
+    document.body.removeChild(downloadLink);
+  }
 
   function importCSVFile(){
     $("#modal_import_students").modal("show");
