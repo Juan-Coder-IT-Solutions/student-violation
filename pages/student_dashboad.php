@@ -86,11 +86,59 @@ $row = $fetch_student->fetch_array();
               </div>
             </div>
           </div>
+          <hr style="margin: 1rem 0;">
+          <div class="col-12">
+            <div class="card shadow-sm border-0">
+              <div class="card-body">
+                <h2 class="card-title text-primary mb-4">Student Offenses Summary</h2>
+                <div class="row text-center">
+                  <!-- Total Offenses -->
+                  <div class="col-md-4">
+                    <div class="summary-card p-4 border rounded shadow-sm">
+                      <h4 class="text-dark">Total Offenses</h4>
+                      <p class="fs-1 text-warning mb-0">
+                        <?php
+                        $total_offenses = $mysqli_connect->query("SELECT COUNT(*) AS total FROM tbl_offenses WHERE student_id = '$row[student_id]'")->fetch_assoc()['total'];
+                        echo $total_offenses ? $total_offenses : '0';
+                        ?>
+                      </p>
+                    </div>
+                  </div>
+                  <!-- Cleared Offenses -->
+                  <div class="col-md-4">
+                    <div class="summary-card p-4 border rounded shadow-sm">
+                      <h4 class="text-dark">Cleared</h4>
+                      <p class="fs-1 text-success mb-0">
+                        <?php
+                        $cleared_offenses = $mysqli_connect->query("SELECT COUNT(*) AS total FROM tbl_offenses WHERE student_id = '$row[student_id]' AND offense_status = 1")->fetch_assoc()['total'];
+                        echo $cleared_offenses ? $cleared_offenses : '0';
+                        ?>
+                      </p>
+                    </div>
+                  </div>
+                  <!-- Not Cleared Offenses -->
+                  <div class="col-md-4">
+                    <div class="summary-card p-4 border rounded shadow-sm">
+                      <h4 class="text-dark">Not Cleared</h4>
+                      <p class="fs-1 text-danger mb-0">
+                        <?php
+                        $not_cleared_offenses = $mysqli_connect->query("SELECT COUNT(*) AS total FROM tbl_offenses WHERE student_id = '$row[student_id]' AND offense_status = 0")->fetch_assoc()['total'];
+                        echo $not_cleared_offenses ? $not_cleared_offenses : '0';
+                        ?>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
+
         <div class="col">
-          <ul class="timeline">
+          <ul class="timeline" style="max-height: 500px; overflow-y: auto;">
             <?php
-            $fetchOffense = $mysqli_connect->query("SELECT * FROM tbl_offenses WHERE student_id = '$user_id' ORDER BY offense_id ASC") or die(mysqli_error());
+            $fetchOffense = $mysqli_connect->query("SELECT * FROM tbl_offenses WHERE student_id = '$row[student_id]' ORDER BY offense_id DESC") or die(mysqli_error());
 
             // Check if there are any offenses
             if ($fetchOffense->num_rows > 0) {
@@ -126,10 +174,10 @@ $row = $fetch_student->fetch_array();
                   <div class="card timeline-event-card">
                     <div class="card-body">
                       <div class="text-muted float-end"><?= timeAgoFromDatetime($offense_row['date_added']) ?></div>
-                      <h4><?= violation_name($offense_row['violation_id']) ?></h4>
+                      <h4 style="color: #FF5722;"><b><?= violation_name($offense_row['violation_id']) ?></b></h4>
                       <p class="text-muted">
                         <strong>Offense Description:</strong> <?= $offense_row['offense_remarks'] ?><br>
-                        <strong>Disciplinary Action Taken:</strong><br>
+                        <strong>Disciplinary Action Taken:</strong> <?= $offense_row['discplinary_action'] ?><br>
                         <strong>Date of Offense:</strong> <?= date('F d, Y', strtotime($offense_row['offense_date'])) ?><br>
                         <strong>Cleared By:</strong> <?= $offense_row['cleared_by'] > 0 ? getUser($offense_row['cleared_by']) : "---"; ?><br>
 

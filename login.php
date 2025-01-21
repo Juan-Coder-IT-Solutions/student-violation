@@ -2,18 +2,10 @@
 <?php
 require_once 'core/config.php';
 
-// Check for a remembered user
-if (isset($_COOKIE['remember_me']) && !isset($_SESSION['dvsa_user_id'])) {
-    $_SESSION['dvsa_user_id'] = $_COOKIE['remember_me'];
-    header("Location: index.php");
-    exit;
-}
-
 if (isset($_SESSION['dvsa_user_id'])) {
     header("Location: index.php");
     exit;
 }
-
 ?>
 <html lang="en">
 
@@ -42,19 +34,22 @@ if (isset($_SESSION['dvsa_user_id'])) {
         }
 
         .row {
-    margin: 0;
-    padding: 0;
-}
-.align-items-center {
-    display: flex;
-    align-items: center;
-}
-.d-flex {
-    display: flex;
-}
-.justify-content-start {
-    justify-content: flex-start;
-}
+            margin: 0;
+            padding: 0;
+        }
+
+        .align-items-center {
+            display: flex;
+            align-items: center;
+        }
+
+        .d-flex {
+            display: flex;
+        }
+
+        .justify-content-start {
+            justify-content: flex-start;
+        }
     </style>
 </head>
 
@@ -76,7 +71,7 @@ if (isset($_SESSION['dvsa_user_id'])) {
                             <div class='col-sm-8 d-flex justify-content-start'>
                                 <span style='font-weight: 900;'>
                                     <span style='font-size: xx-large; font-weight: bold;'>CHMSU</span> <br>
-                                    <span>Student Violations System</span> 
+                                    <span>Student Violations System</span>
                                 </span>
                             </div>
                         </div>
@@ -106,6 +101,7 @@ if (isset($_SESSION['dvsa_user_id'])) {
             </div>
         </div>
     </div>
+
     <!-- Libs JS -->
     <!-- Tabler Core -->
     <script src="dist/jquery-3.7.1.min.js" type="text/javascript"></script>
@@ -114,6 +110,33 @@ if (isset($_SESSION['dvsa_user_id'])) {
     <script src="dist/js/tabler.min.js?1684106062" defer></script>
     <script src="dist/js/demo.min.js?1684106062" defer></script>
     <script type="text/javascript">
+        // Check if 'remember_me' cookie exists and autofill the username field
+        $(document).ready(function() {
+            var username = getCookie("remember_me");
+            if (username != "") {
+                $("input[name='username']").val(username);
+                $("#remember_me").prop("checked", true);
+            }
+        });
+
+        // Function to get cookie by name
+        function getCookie(name) {
+            var cname = name + "=";
+            var decodedCookie = decodeURIComponent(document.cookie);
+            var ca = decodedCookie.split(';');
+            for (var i = 0; i < ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) == ' ') {
+                    c = c.substring(1);
+                }
+                if (c.indexOf(cname) == 0) {
+                    return c.substring(cname.length, c.length);
+                }
+            }
+            return "";
+        }
+
+        // Handle form submission
         $("#frm_login").submit(function(e) {
             e.preventDefault();
             $.ajax({
@@ -122,13 +145,13 @@ if (isset($_SESSION['dvsa_user_id'])) {
                 data: $("#frm_login").serialize(),
                 success: function(data) {
                     if (data == 1) {
+                        // If login is successful, check if "Remember Me" is checked and set the cookie
                         if ($("#remember_me").is(":checked")) {
-                            // Set cookie to remember user
                             document.cookie = "remember_me=" + $("input[name='username']").val() + "; path=/; max-age=" + (30 * 24 * 60 * 60);
                         }
                         window.location = 'index.php';
                     } else {
-                        alert(data);
+                        alert(data); 
                     }
                 }
             });

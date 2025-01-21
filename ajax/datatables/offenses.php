@@ -1,6 +1,6 @@
 <?php
 require_once '../../core/config.php';
-$fetch_products = $mysqli_connect->query("SELECT * FROM tbl_offenses") or die(mysqli_error());
+$fetch_products = $mysqli_connect->query("SELECT * FROM tbl_offenses ORDER BY offense_id DESC") or die(mysqli_error());
 $response['data'] = array();
 $count = 1;
 while( $row = $fetch_products->fetch_array() ){

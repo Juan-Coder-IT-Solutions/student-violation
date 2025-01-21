@@ -247,7 +247,7 @@
           "mRender": function(data, type, row) {
             var c_btn = row.offense_status == 1 ? 'display:none;' : '';
             var p_btn = row.offense_status == 1 ? '' : 'display:none;';
-            return "<center><button class='btn btn-primary' onclick='getEntryDetails(" + row.offense_id + ")'><span class='mdi mdi-grease-pencil'></span></button><button class='btn btn-warning' style='" + c_btn + "' onclick='clearOffense(" + row.offense_id + ")'><span class='mdi mdi-checkbox-marked-circle-outline'></span></button><button class='btn btn-secondary' style='" + p_btn + "' onclick='offenseFormModal(" + row.offense_id + ")'><span class='mdi mdi-printer'></span></button></center>";
+            return "<center><button class='btn btn-primary' onclick='getEntryDetails(" + row.offense_id + ")'><span class='mdi mdi-grease-pencil'></span></button><button class='btn btn-warning' style='" + c_btn + "' onclick='clearOffense(" + row.offense_id + ")'><span class='mdi mdi-checkbox-marked-circle-outline'></span></button><button class='btn btn-secondary' onclick='offenseFormModal(" + row.offense_id + ")'><span class='mdi mdi-printer'></span></button></center>";
           }
         },
         {
