@@ -95,37 +95,37 @@ $row = $fetch_student->fetch_array();
                   <!-- Total Offenses -->
                   <div class="col-md-4">
                     <div class="summary-card p-4 border rounded shadow-sm">
-                      <h4 class="text-dark">Total Offenses</h4>
-                      <p class="fs-1 text-warning mb-0">
-                        <?php
+                      <h4 class="text-warning">Total Offenses</h4>
+                      <div class="avatar bg-yellow-lt" data-demo-color="">
+                      <?php
                         $total_offenses = $mysqli_connect->query("SELECT COUNT(*) AS total FROM tbl_offenses WHERE student_id = '$row[student_id]'")->fetch_assoc()['total'];
                         echo $total_offenses ? $total_offenses : '0';
                         ?>
-                      </p>
+                      </div>
                     </div>
                   </div>
                   <!-- Cleared Offenses -->
                   <div class="col-md-4">
                     <div class="summary-card p-4 border rounded shadow-sm">
-                      <h4 class="text-dark">Cleared</h4>
-                      <p class="fs-1 text-success mb-0">
+                      <h4 class="text-success">Cleared</h4>
+                      <div class="avatar bg-green-lt" data-demo-color="">
                         <?php
                         $cleared_offenses = $mysqli_connect->query("SELECT COUNT(*) AS total FROM tbl_offenses WHERE student_id = '$row[student_id]' AND offense_status = 1")->fetch_assoc()['total'];
                         echo $cleared_offenses ? $cleared_offenses : '0';
                         ?>
-                      </p>
+                      </div>
                     </div>
                   </div>
                   <!-- Not Cleared Offenses -->
                   <div class="col-md-4">
                     <div class="summary-card p-4 border rounded shadow-sm">
-                      <h4 class="text-dark">Not Cleared</h4>
-                      <p class="fs-1 text-danger mb-0">
-                        <?php
+                      <h4 class="text-danger">Not Cleared</h4>
+                      <div class="avatar bg-red-lt" data-demo-color="">
+                      <?php
                         $not_cleared_offenses = $mysqli_connect->query("SELECT COUNT(*) AS total FROM tbl_offenses WHERE student_id = '$row[student_id]' AND offense_status = 0")->fetch_assoc()['total'];
                         echo $not_cleared_offenses ? $not_cleared_offenses : '0';
                         ?>
-                      </p>
+                      </div>
                     </div>
                   </div>
                 </div>

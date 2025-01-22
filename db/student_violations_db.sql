@@ -48,7 +48,7 @@ INSERT INTO `tbl_offenses` (`offense_id`, `student_id`, `violation_id`, `offense
 	(7, 12, 4, 'Student used inappropriate language toward a faculty member during class on Jan. 21, 2025.', 'Apology letter to faculty member\r\nParental notification', '2025-01-21', 0, 0, '2025-01-21 19:13:17'),
 	(8, 14, 3, 'Student repeatedly sent derogatory messages to a classmate via social media, causing emotional distress.', 'Counseling sessions for both parties involved\r\nWritten apology to the victim\r\nTwo-week suspension\r\nParental notification', '2025-01-21', 0, 0, '2025-01-21 19:15:35'),
 	(9, 16, 7, 'Student was caught taking another student\'s unattended mobile phone in the library without permission.', 'The student is required to return the stolen item and issue a formal written apology to the victim. A one-month suspension will be imposed, during which the student must complete a restorative justice program focusing on accountability and respect for others\' property. The parents or guardians of the student will be informed, and the student will be placed under probation for the remainder of the semester.', '2025-01-21', 0, 0, '2025-01-21 19:17:27'),
-	(10, 26, 9, 'Student was observed entering the university premises on January 15, 2025, wearing inappropriate attire that did not conform to the university\'s prescribed dress code policy.', 'he student received a verbal warning and was advised to change into proper attire before attending classes. A record of the violation has been noted, and repeated offenses will result in a formal written warning and possible restriction from campus access until compliance is ensured.', '2025-01-15', 0, 0, '2025-01-15 19:22:39');
+	(10, 26, 9, 'Student was observed entering the university premises on January 15, 2025, wearing inappropriate attire that did not conform to the university\'s prescribed dress code policy.', 'The student received a verbal warning and was advised to change into proper attire before attending classes. A record of the violation has been noted, and repeated offenses will result in a formal written warning and possible restriction from campus access until compliance is ensured.', '2025-01-15', 1, 2, '2025-01-15 19:22:39');
 
 -- Dumping structure for table student_violations_db.tbl_students
 CREATE TABLE IF NOT EXISTS `tbl_students` (
@@ -95,27 +95,28 @@ CREATE TABLE IF NOT EXISTS `tbl_users` (
   `password` text NOT NULL,
   `date_added` datetime DEFAULT current_timestamp(),
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4;
 
--- Dumping data for table student_violations_db.tbl_users: ~17 rows (approximately)
+-- Dumping data for table student_violations_db.tbl_users: ~18 rows (approximately)
 INSERT INTO `tbl_users` (`user_id`, `user_fname`, `user_mname`, `user_lname`, `user_category`, `username`, `password`, `date_added`) VALUES
-	(2, 'Juan', '', 'Dela Cruz', 'A', 'admin', '0cc175b9c0f1b6a831c399e269772661', '2024-05-26 19:56:25'),
+	(2, 'Juan', '', 'Dela Cruz', 'A', 'admin', '827ccb0eea8a706c4c34a16891f84e7b', '2024-05-26 19:56:25'),
 	(18, 'Ana', 'Pimentel', 'Alonzo', 'S', 'ana', '827ccb0eea8a706c4c34a16891f84e7b', '2025-01-21 16:39:29'),
 	(19, 'Maria Kate', 'Cruz', 'Paz', 'S', 'maria kate', '827ccb0eea8a706c4c34a16891f84e7b', '2025-01-21 16:39:29'),
 	(20, 'Keno', 'Dela Cruz', 'Santos', 'S', 'keno', '827ccb0eea8a706c4c34a16891f84e7b', '2025-01-21 16:39:29'),
 	(21, 'Maria Clara', 'Reyes', 'Hernandez', 'S', 'maria clara', '827ccb0eea8a706c4c34a16891f84e7b', '2025-01-21 16:39:29'),
 	(22, 'Carlos', 'Lopez', 'Garcia', 'S', '', '827ccb0eea8a706c4c34a16891f84e7b', '2025-01-21 16:39:29'),
-	(23, 'Emilia', 'Ana', 'Alvarez', 'S', 'emilia', '827ccb0eea8a706c4c34a16891f84e7b', '2025-01-21 16:39:29'),
+	(23, 'Emilia', '', 'Alvarez', 'S', 'emilia', '827ccb0eea8a706c4c34a16891f84e7b', '2025-01-21 16:39:29'),
 	(24, 'Marcos', 'Esteban', 'Bautista', 'S', 'marcos', '827ccb0eea8a706c4c34a16891f84e7b', '2025-01-21 16:39:29'),
 	(25, 'Sofia', 'Gracia', 'Hernandez', 'S', 'sofia', '827ccb0eea8a706c4c34a16891f84e7b', '2025-01-21 16:39:29'),
-	(26, 'David', 'Lee', 'Tomas', 'S', '', '827ccb0eea8a706c4c34a16891f84e7b', '2025-01-21 16:39:29'),
-	(27, 'Olivia', 'Grace', 'Villanueva', 'S', 'olivia', '827ccb0eea8a706c4c34a16891f84e7b', '2025-01-21 16:39:29'),
+	(26, 'David', 'Lee', 'Yulo', 'S', '', '827ccb0eea8a706c4c34a16891f84e7b', '2025-01-21 16:39:29'),
+	(27, 'Olivia', 'Uy', 'Villanueva', 'S', 'olivia', '827ccb0eea8a706c4c34a16891f84e7b', '2025-01-21 16:39:29'),
 	(28, 'Andres', 'Santiago', 'Reyes', 'S', 'andres', '827ccb0eea8a706c4c34a16891f84e7b', '2025-01-21 16:40:58'),
-	(29, 'Beatriz', 'Maria', 'Cruz', 'S', 'beatriz', '827ccb0eea8a706c4c34a16891f84e7b', '2025-01-21 16:40:58'),
-	(30, 'Carlo', 'Luis', 'Valdez', 'S', 'carlo1', '827ccb0eea8a706c4c34a16891f84e7b', '2025-01-21 16:42:19'),
-	(31, 'Daniel', 'Jose', 'Santos', 'S', 'daniel', '827ccb0eea8a706c4c34a16891f84e7b', '2025-01-21 16:43:00'),
+	(29, 'Beatriz', 'Alvarez', 'Cruz', 'S', 'beatriz', '827ccb0eea8a706c4c34a16891f84e7b', '2025-01-21 16:40:58'),
+	(30, 'Carlo', 'Estor', 'Valdez', 'S', 'carlo1', '827ccb0eea8a706c4c34a16891f84e7b', '2025-01-21 16:42:19'),
+	(31, 'Daniel', 'Dee', 'Santos', 'S', 'daniel', '827ccb0eea8a706c4c34a16891f84e7b', '2025-01-21 16:43:00'),
 	(32, 'Erika', 'Luz', 'Mendoza', 'S', 'erika', '827ccb0eea8a706c4c34a16891f84e7b', '2025-01-21 16:43:00'),
-	(33, 'Felix', 'Xavier', 'Ortega', 'S', 'felix', '827ccb0eea8a706c4c34a16891f84e7b', '2025-01-21 16:43:43');
+	(33, 'Felix', 'Guzman', 'Alabe', 'S', 'felix', '827ccb0eea8a706c4c34a16891f84e7b', '2025-01-21 16:43:43'),
+	(34, 'John', '', 'Doe', 'A', 'admin2', '827ccb0eea8a706c4c34a16891f84e7b', '2025-01-22 13:50:32');
 
 -- Dumping structure for table student_violations_db.tbl_violations
 CREATE TABLE IF NOT EXISTS `tbl_violations` (
