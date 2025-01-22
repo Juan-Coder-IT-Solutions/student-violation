@@ -61,8 +61,8 @@
                                             <th>#</th>
                                             <th>Student</th>
                                             <th>Violation</th>
-                                            <th>Description</th>
                                             <th>Remarks</th>
+                                            <th>Disciplinary Action</th>
                                             <th>Date Added</th>
                                         </tr>
                                     </thead>
@@ -112,8 +112,8 @@
                 { "data": "count" },
                 { "data": "student" },
                 { "data": "violation_name" },
-                { "data": "violation_desc" },
                 { "data": "offense_remarks" },
+                { "data": "discplinary_action" },
                 { "data": "date_added" }
             ]
         });
