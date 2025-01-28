@@ -94,7 +94,7 @@ if (isset($_SESSION['dvsa_user_id'])) {
                             <button type="submit" class="btn btn-success w-100">Log in</button>
                         </div>
                         <div class="text-center mt-3">
-                            <!-- <a href="forgot_password.php" class="text-muted">Forgot Password?</a> -->
+                            <a href="forgot_password.php" class="text-muted">Forgot Password?</a>
                         </div>
                     </form>
                 </div>

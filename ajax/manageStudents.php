@@ -22,7 +22,7 @@ if($type == "add"){
         echo 2;
     }else{
         
-        $sql = $mysqli_connect->query("INSERT INTO tbl_users SET user_fname='$student_fname',user_mname='$student_mname',user_lname='$student_lname', user_category='S', username='$username', password=md5('$password'), date_added='$date'") or die(mysqli_error());
+        $sql = $mysqli_connect->query("INSERT INTO tbl_users SET user_fname='$student_fname',user_mname='$student_mname',user_lname='$student_lname', user_category='S', username='$username', password=md5('$password'), date_added='$date', user_email='$student_email'") or die(mysqli_error());
         if($sql){
             
             $user_id = $mysqli_connect->insert_id;
@@ -43,7 +43,7 @@ if($type == "add"){
         $user_id = $row['user_id'];
         $sql = $mysqli_connect->query("UPDATE tbl_students SET student_fname='$student_fname',student_mname='$student_mname',student_lname='$student_lname', user_id='$user_id', year_level='$year_level', section='$section',student_email='$student_email' WHERE student_id ='$student_id'") or die(mysqli_error());
         if($sql){
-            $mysqli_connect->query("UPDATE tbl_users SET user_fname='$student_fname',user_mname='$student_mname',user_lname='$student_lname'  WHERE user_id ='$user_id'");
+            $mysqli_connect->query("UPDATE tbl_users SET user_fname='$student_fname',user_mname='$student_mname',user_lname='$student_lname',user_email='$student_email'  WHERE user_id ='$user_id'");
             echo 1;
         }else{
             echo 0;

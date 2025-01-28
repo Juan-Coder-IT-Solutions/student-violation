@@ -44,7 +44,7 @@ if (isset($_FILES['import_file']) && $_FILES['import_file']['error'] == 0) {
                 continue;
             }
 
-            $sql = $mysqli_connect->query("INSERT INTO tbl_users SET user_fname='$student_fname', user_mname='$student_mname', user_lname='$student_lname', user_category='S', username='$username', password=md5('$password'), date_added='$date'") or die(mysqli_error());
+            $sql = $mysqli_connect->query("INSERT INTO tbl_users SET user_fname='$student_fname', user_mname='$student_mname', user_lname='$student_lname', user_category='S', username='$username', password=md5('$password'), date_added='$date',user_email='$student_email'") or die(mysqli_error());
 
             if ($sql) {
                 $user_id = $mysqli_connect->insert_id;
