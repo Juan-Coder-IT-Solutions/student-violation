@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS `tbl_offenses` (
   PRIMARY KEY (`offense_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4;
 
--- Dumping data for table student_violations_db.tbl_offenses: ~6 rows (approximately)
+-- Dumping data for table student_violations_db.tbl_offenses: ~5 rows (approximately)
 INSERT INTO `tbl_offenses` (`offense_id`, `student_id`, `violation_id`, `offense_remarks`, `discplinary_action`, `offense_date`, `offense_status`, `cleared_by`, `date_added`) VALUES
 	(5, 27, 4, 'On January 15, 2025, at 10:30 AM, Felix Ortega caused a disturbance during a lecture by making loud noises and ignoring the instructor\'s warnings.', 'The student will receive a formal warning and be reminded of the institution’s code of conduct.', '2025-01-17', 1, 2, '2025-01-21 16:48:34'),
 	(6, 27, 6, 'A student was reported for writing graffiti on university property.', 'Cleaning of vandalized area\r\nCommunity service (10 hours)\r\nWritten warning', '2025-01-21', 0, 0, '2025-01-21 18:57:26'),
@@ -65,7 +65,7 @@ CREATE TABLE IF NOT EXISTS `tbl_students` (
   PRIMARY KEY (`student_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4;
 
--- Dumping data for table student_violations_db.tbl_students: ~16 rows (approximately)
+-- Dumping data for table student_violations_db.tbl_students: ~14 rows (approximately)
 INSERT INTO `tbl_students` (`student_id`, `student_fname`, `student_mname`, `student_lname`, `student_email`, `year_level`, `course_id`, `section`, `user_id`, `date_added`) VALUES
 	(12, 'Ana', 'Pimentel', 'Alonzo', 'ana.pimentel@gmail.com', 'First Year', 2, 'A', 18, '2025-01-21 16:39:29'),
 	(13, 'Maria Kate', 'Cruz', 'Paz', 'mariakate.cruz@gmail.com', 'First Year', 2, 'A', 19, '2025-01-21 16:39:29'),
@@ -82,7 +82,7 @@ INSERT INTO `tbl_students` (`student_id`, `student_fname`, `student_mname`, `stu
 	(24, 'Carlo', 'Luis', 'Valdez', 'carlo.valdez@example.com', 'Third Year', 2, 'C', 30, '2025-01-21 16:42:19'),
 	(25, 'Daniel', 'Jose', 'Santos', 'daniel.santos@example.com', 'Fourth Year', 2, 'D', 31, '2025-01-21 16:43:00'),
 	(26, 'Erika', 'Dee', 'Mendoza', 'erika.mendoza@example.com', 'Fourth Year', 2, 'A', 32, '2025-01-21 16:43:00'),
-	(27, 'Felix', 'Uy', 'Alabe', 'felix.ortega@example.com', 'First Year', 3, 'B', 33, '2025-01-21 16:43:43');
+	(27, 'Mark', 'Dee', 'Alabes', 'felix.ortega@example.com', 'First Year', 3, 'B', 33, '2025-01-21 16:43:43');
 
 -- Dumping structure for table student_violations_db.tbl_users
 CREATE TABLE IF NOT EXISTS `tbl_users` (
@@ -90,33 +90,35 @@ CREATE TABLE IF NOT EXISTS `tbl_users` (
   `user_fname` varchar(50) NOT NULL,
   `user_mname` varchar(50) NOT NULL,
   `user_lname` varchar(50) NOT NULL,
+  `user_email` varchar(50) NOT NULL,
   `user_category` varchar(1) NOT NULL,
   `username` varchar(50) NOT NULL,
   `password` text NOT NULL,
+  `otp` varchar(10) NOT NULL,
   `date_added` datetime DEFAULT current_timestamp(),
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4;
 
--- Dumping data for table student_violations_db.tbl_users: ~18 rows (approximately)
-INSERT INTO `tbl_users` (`user_id`, `user_fname`, `user_mname`, `user_lname`, `user_category`, `username`, `password`, `date_added`) VALUES
-	(2, 'Juan', '', 'Dela Cruz', 'A', 'admin', '827ccb0eea8a706c4c34a16891f84e7b', '2024-05-26 19:56:25'),
-	(18, 'Ana', 'Pimentel', 'Alonzo', 'S', 'ana', '827ccb0eea8a706c4c34a16891f84e7b', '2025-01-21 16:39:29'),
-	(19, 'Maria Kate', 'Cruz', 'Paz', 'S', 'maria kate', '827ccb0eea8a706c4c34a16891f84e7b', '2025-01-21 16:39:29'),
-	(20, 'Keno', 'Dela Cruz', 'Santos', 'S', 'keno', '827ccb0eea8a706c4c34a16891f84e7b', '2025-01-21 16:39:29'),
-	(21, 'Maria Clara', 'Reyes', 'Hernandez', 'S', 'maria', '827ccb0eea8a706c4c34a16891f84e7b', '2025-01-21 16:39:29'),
-	(22, 'Carlos', 'Lopez', 'Garcia', 'S', 'carlos', '827ccb0eea8a706c4c34a16891f84e7b', '2025-01-21 16:39:29'),
-	(23, 'Emilia', '', 'Alvarez', 'S', 'emilia', '827ccb0eea8a706c4c34a16891f84e7b', '2025-01-21 16:39:29'),
-	(24, 'Marcos', 'Esteban', 'Bautista', 'S', 'marcos', '827ccb0eea8a706c4c34a16891f84e7b', '2025-01-21 16:39:29'),
-	(25, 'Sofia', 'Gracia', 'Hernandez', 'S', 'sofia', '827ccb0eea8a706c4c34a16891f84e7b', '2025-01-21 16:39:29'),
-	(26, 'David', 'Lee', 'Tomas', 'S', 'david', '827ccb0eea8a706c4c34a16891f84e7b', '2025-01-21 16:39:29'),
-	(27, 'Olivia', 'Uy', 'Villanueva', 'S', 'olivia', '827ccb0eea8a706c4c34a16891f84e7b', '2025-01-21 16:39:29'),
-	(28, 'Andres', 'Santiago', 'Reyes', 'S', 'andres', '827ccb0eea8a706c4c34a16891f84e7b', '2025-01-21 16:40:58'),
-	(29, 'Beatriz', 'Alvarez', 'Cruz', 'S', 'beatriz', '827ccb0eea8a706c4c34a16891f84e7b', '2025-01-21 16:40:58'),
-	(30, 'Carlo', 'Estor', 'Valdez', 'S', 'carlo1', '827ccb0eea8a706c4c34a16891f84e7b', '2025-01-21 16:42:19'),
-	(31, 'Daniel', 'Dee', 'Santos', 'S', 'daniel', '827ccb0eea8a706c4c34a16891f84e7b', '2025-01-21 16:43:00'),
-	(32, 'Erika', 'Dee', 'Mendoza', 'S', 'ericka', '827ccb0eea8a706c4c34a16891f84e7b', '2025-01-21 16:43:00'),
-	(33, 'Felix', 'Uy', 'Alabe', 'S', 'felix', '827ccb0eea8a706c4c34a16891f84e7b', '2025-01-21 16:43:43'),
-	(34, 'John', '', 'Doe', 'A', 'admin2', '827ccb0eea8a706c4c34a16891f84e7b', '2025-01-22 13:50:32');
+-- Dumping data for table student_violations_db.tbl_users: ~16 rows (approximately)
+INSERT INTO `tbl_users` (`user_id`, `user_fname`, `user_mname`, `user_lname`, `user_email`, `user_category`, `username`, `password`, `otp`, `date_added`) VALUES
+	(2, 'Juan', '', 'Dela Cruz', 'jacildokaye@gmail.com', 'A', 'admin', '827ccb0eea8a706c4c34a16891f84e7b', '422535', '2024-05-26 19:56:25'),
+	(18, 'Ana', 'Pimentel', 'Alonzo', '', 'S', 'ana', '827ccb0eea8a706c4c34a16891f84e7b', '', '2025-01-21 16:39:29'),
+	(19, 'Maria Kate', 'Cruz', 'Paz', '', 'S', 'maria kate', '827ccb0eea8a706c4c34a16891f84e7b', '', '2025-01-21 16:39:29'),
+	(20, 'Keno', 'Dela Cruz', 'Santos', '', 'S', 'keno', '827ccb0eea8a706c4c34a16891f84e7b', '', '2025-01-21 16:39:29'),
+	(21, 'Maria Clara', 'Reyes', 'Hernandez', '', 'S', 'maria', '827ccb0eea8a706c4c34a16891f84e7b', '', '2025-01-21 16:39:29'),
+	(22, 'Carlos', 'Lopez', 'Garcia', '', 'S', 'carlos', '827ccb0eea8a706c4c34a16891f84e7b', '', '2025-01-21 16:39:29'),
+	(23, 'Emilia', '', 'Alvarez', '', 'S', 'emilia', '827ccb0eea8a706c4c34a16891f84e7b', '', '2025-01-21 16:39:29'),
+	(24, 'Marcos', 'Esteban', 'Bautista', '', 'S', 'marcos', '827ccb0eea8a706c4c34a16891f84e7b', '', '2025-01-21 16:39:29'),
+	(25, 'Sofia', 'Gracia', 'Hernandez', '', 'S', 'sofia', '827ccb0eea8a706c4c34a16891f84e7b', '', '2025-01-21 16:39:29'),
+	(26, 'David', 'Lee', 'Tomas', '', 'S', 'david', '827ccb0eea8a706c4c34a16891f84e7b', '', '2025-01-21 16:39:29'),
+	(27, 'Olivia', 'Uy', 'Villanueva', '', 'S', 'olivia', '827ccb0eea8a706c4c34a16891f84e7b', '', '2025-01-21 16:39:29'),
+	(28, 'Andres', 'Santiago', 'Reyes', '', 'S', 'andres', '827ccb0eea8a706c4c34a16891f84e7b', '', '2025-01-21 16:40:58'),
+	(29, 'Beatriz', 'Alvarez', 'Cruz', '', 'S', 'beatriz', '827ccb0eea8a706c4c34a16891f84e7b', '', '2025-01-21 16:40:58'),
+	(30, 'Carlo', 'Estor', 'Valdez', '', 'S', 'carlo1', '827ccb0eea8a706c4c34a16891f84e7b', '', '2025-01-21 16:42:19'),
+	(31, 'Daniel', 'Dee', 'Santos', '', 'S', 'daniel', '827ccb0eea8a706c4c34a16891f84e7b', '', '2025-01-21 16:43:00'),
+	(32, 'Erika', 'Dee', 'Mendoza', '', 'S', 'ericka', '827ccb0eea8a706c4c34a16891f84e7b', '', '2025-01-21 16:43:00'),
+	(33, 'Mark', 'Dee', 'Alabes', '', 'S', 'felix1', '827ccb0eea8a706c4c34a16891f84e7b', '', '2025-01-21 16:43:43'),
+	(34, 'John', '', 'Doe', '', 'A', 'admin2', '827ccb0eea8a706c4c34a16891f84e7b', '', '2025-01-22 13:50:32');
 
 -- Dumping structure for table student_violations_db.tbl_violations
 CREATE TABLE IF NOT EXISTS `tbl_violations` (
