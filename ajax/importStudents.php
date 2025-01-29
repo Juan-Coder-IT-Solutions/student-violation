@@ -33,8 +33,9 @@ if (isset($_FILES['import_file']) && $_FILES['import_file']['error'] == 0) {
             $student_lname = $mysqli_connect->real_escape_string(trim($data[2]));
             $section = $mysqli_connect->real_escape_string(trim($data[3]));
             $student_email = $mysqli_connect->real_escape_string(trim($data[4]));
-            $username = $mysqli_connect->real_escape_string(trim($data[5]));
-            $password = $mysqli_connect->real_escape_string(trim($data[6]));
+            $gender = $mysqli_connect->real_escape_string(trim($data[5]));
+            $username = $mysqli_connect->real_escape_string(trim($data[6]));
+            $password = $mysqli_connect->real_escape_string(trim($data[7]));
 
             $checker = $mysqli_connect->query("SELECT COUNT(*) as count FROM tbl_students WHERE student_fname='$student_fname' AND student_mname='$student_mname' AND student_lname='$student_lname'") or die(mysqli_error());
             $result = $checker->fetch_assoc();
@@ -49,7 +50,7 @@ if (isset($_FILES['import_file']) && $_FILES['import_file']['error'] == 0) {
             if ($sql) {
                 $user_id = $mysqli_connect->insert_id;
 
-                $mysqli_connect->query("INSERT INTO tbl_students SET student_fname='$student_fname', student_mname='$student_mname', student_lname='$student_lname', course_id='$course_id',student_email='$student_email', date_added='$date', user_id='$user_id', section='$section', year_level='$year_level'") or die(mysqli_error());
+                $mysqli_connect->query("INSERT INTO tbl_students SET student_fname='$student_fname', student_mname='$student_mname', student_lname='$student_lname', course_id='$course_id',student_email='$student_email', date_added='$date', user_id='$user_id', section='$section', year_level='$year_level',gender='$gender'") or die(mysqli_error());
                 $insertedCount++;
             }
         }

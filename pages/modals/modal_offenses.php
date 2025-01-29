@@ -49,7 +49,7 @@
             </div>
             <div class="col-sm-12">
             <div class="mb-3">
-                <label class="form-label">Ofense type <strong style="color:red;">*</strong></label>
+                <label class="form-label">Offense type <strong style="color:red;">*</strong></label>
                 <select class="select2 form-control" id="offense_type" name="offense_type" required>
                   <option value="">Please Select</option>
                   <option value="Minor">Minor</option>

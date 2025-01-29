@@ -52,7 +52,7 @@
                                             <th>Violations</th>
                                             <th>Date Reported</th>
                                             <th>Violation Description</th>
-                                            <th>Offen Type</th>
+                                            <th>Offense Type</th>
                                             <th>Disciplinary Action</th>
                                             <th>Remarks</th>
                                             <th>Date Updated</th>

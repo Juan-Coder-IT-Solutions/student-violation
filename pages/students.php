@@ -87,7 +87,7 @@
   function downloadCsvFormat() {
     // Define the CSV content
     const csvContent = [
-      ["Firstname", "Middlename", "Lastname", "Section", "Email", "Username", "Password"]
+      ["Firstname", "Middlename", "Lastname", "Section", "Email","Gender", "Username", "Password"]
     ];
 
     // Convert array to CSV string
