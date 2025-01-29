@@ -59,11 +59,9 @@
                                     <thead class="thead-light">
                                         <tr>
                                             <th>#</th>
-                                            <th>Student</th>
-                                            <th>Violation</th>
-                                            <th>Remarks</th>
-                                            <th>Disciplinary Action</th>
-                                            <th>Date Added</th>
+                                            <th>Offense Type</th>
+                                            <th>Total Offenses</th>
+                                            <th>Gender List</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -110,11 +108,9 @@
             },
             "columns": [
                 { "data": "count" },
-                { "data": "student" },
-                { "data": "violation_name" },
-                { "data": "offense_remarks" },
-                { "data": "discplinary_action" },
-                { "data": "date_added" }
+                { "data": "offense_type" },
+                { "data": "total_offenses" },
+                { "data": "gender_list" },
             ]
         });
     }

@@ -13,8 +13,12 @@ while( $row = $fetch_products->fetch_array() ){
     $list['violation_id']       = $row['violation_id'];    
     $list['student']            = $row['student_fname'] . " " . $row['student_mname'] . " " . $row['student_lname'];
     $list['violation_name']     = $row['violation_name'];
-    $list['offense_remarks']    = $row['offense_remarks'];
+    $list['offense_date']       = $row['offense_date'];
+    $list['violation_desc']     = $row['violation_desc'];
+    $list['offense_type']       = $row['offense_type'];
     $list['discplinary_action'] = $row['discplinary_action'];
+    $list['offense_remarks']    = $row['offense_remarks'];
+
     
     $list['date_added']         = date('F d,Y', strtotime($row['date_added']));
 	array_push($response['data'], $list);

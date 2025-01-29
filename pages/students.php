@@ -61,6 +61,7 @@
                                             <th>Course</th>
                                             <th>Year Level</th>
                                             <th>Section</th>
+                                            <th>Gender</th>
                                             <th>Email</th>
                                             <th>Date Added</th>
                                         </tr>
@@ -190,7 +191,8 @@
         $("#year_level").val(json.year_level);
         $("#section").val(json.section);
         $("#student_email").val(json.student_email);
-
+        $("#gender").val(json.gender);
+        
         $('.user_input').removeAttr('required');
         
         $("#student_id").val(json.student_id);
@@ -277,6 +279,9 @@
         },
         {
           "data": "section"
+        },
+        {
+          "data": "gender"
         },
         {
           "data": "student_email"

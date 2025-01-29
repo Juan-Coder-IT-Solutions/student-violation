@@ -12,6 +12,8 @@ $password = $mysqli_connect->real_escape_string($_POST['password']);
 $type = $mysqli_connect->real_escape_string($_POST['type']);
 $student_id  = $mysqli_connect->real_escape_string($_POST['student_id']);
 
+$gender  = $mysqli_connect->real_escape_string($_POST['gender']);
+
 $date = getCurrentDate();
 
 if($type == "add"){
@@ -26,7 +28,7 @@ if($type == "add"){
         if($sql){
             
             $user_id = $mysqli_connect->insert_id;
-            $mysqli_connect->query("INSERT INTO tbl_students SET student_fname='$student_fname',student_mname='$student_mname',student_lname='$student_lname',course_id='$course_id',student_email='$student_email', date_added='$date', user_id='$user_id', section='$section', year_level='$year_level'") or die(mysqli_error());
+            $mysqli_connect->query("INSERT INTO tbl_students SET student_fname='$student_fname',student_mname='$student_mname',student_lname='$student_lname',course_id='$course_id',student_email='$student_email', date_added='$date', user_id='$user_id', section='$section', year_level='$year_level',gender='$gender'") or die(mysqli_error());
 
             echo 1;
         }else{
@@ -41,7 +43,7 @@ if($type == "add"){
         $fetch = $mysqli_connect->query("SELECT * FROM tbl_students WHERE student_id = '$student_id'") or die(mysqli_error());
         $row = $fetch->fetch_array();
         $user_id = $row['user_id'];
-        $sql = $mysqli_connect->query("UPDATE tbl_students SET student_fname='$student_fname',student_mname='$student_mname',student_lname='$student_lname', user_id='$user_id', year_level='$year_level', section='$section',student_email='$student_email' WHERE student_id ='$student_id'") or die(mysqli_error());
+        $sql = $mysqli_connect->query("UPDATE tbl_students SET student_fname='$student_fname',student_mname='$student_mname',student_lname='$student_lname', user_id='$user_id', year_level='$year_level', section='$section',student_email='$student_email',gender='$gender' WHERE student_id ='$student_id'") or die(mysqli_error());
         if($sql){
             $mysqli_connect->query("UPDATE tbl_users SET user_fname='$student_fname',user_mname='$student_mname',user_lname='$student_lname',user_email='$student_email'  WHERE user_id ='$user_id'");
             echo 1;

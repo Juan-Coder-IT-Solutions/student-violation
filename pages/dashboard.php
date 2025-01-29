@@ -19,7 +19,7 @@ if ($_SESSION['user_category'] != "S") {
                 <div class="col-10">
                   <h1 class="fw-bold">Welcome, <strong style="color:orange"><?= strtoupper(getUsername($user_id)) ?>!</strong></h1>
                   <p class="text-muted">
-                    Manage and monitor your data efficiently. Explore the dashboard for insights and actions.
+                    Explore the dashboard for insights and actions.
                   </p>
                 </div>
               </div>

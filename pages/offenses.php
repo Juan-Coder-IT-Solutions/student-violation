@@ -176,13 +176,16 @@
       success: function(data) {
         var json = JSON.parse(data);
         console.log(data);
+        
+        $("#offense_id").val(json.offense_id);
         $("#student_id").val(json.student_id);
         $("#violation_id").val(json.violation_id);
         $("#offense_remarks").val(json.offense_remarks);
         $("#offense_date").val(json.offense_date);
         $("#discplinary_action").val(json.discplinary_action);
+        $("#discplinary_action").val(json.discplinary_action);
 
-        $("#offense_id").val(json.offense_id);
+        $("#offense_type").val(json.offense_type);
         $(".modal_type").val("update");
       }
     });

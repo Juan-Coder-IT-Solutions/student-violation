@@ -49,10 +49,13 @@
                                         <tr>
                                             <th>#</th>
                                             <th>Student</th>
-                                            <th>Violation</th>
-                                            <th>Remarks</th>
+                                            <th>Violations</th>
+                                            <th>Date Reported</th>
+                                            <th>Violation Description</th>
+                                            <th>Offen Type</th>
                                             <th>Disciplinary Action</th>
-                                            <th>Date Added</th>
+                                            <th>Remarks</th>
+                                            <th>Date Updated</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -99,8 +102,11 @@
                 { "data": "count" },
                 { "data": "student" },
                 { "data": "violation_name" },
-                { "data": "offense_remarks" },
+                { "data": "offense_date" },
+                { "data": "violation_desc" },
+                { "data": "offense_type" },
                 { "data": "discplinary_action" },
+                { "data": "offense_remarks" },
                 { "data": "date_added" }
             ]
         });
@@ -131,3 +137,4 @@
         XLSX.writeFile(wb, filename + ".xlsx");
     }
 </script>
+
