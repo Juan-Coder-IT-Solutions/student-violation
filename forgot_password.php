@@ -75,10 +75,10 @@ require_once 'core/config.php';
 
 <body class="d-flex flex-column">
     <script src="./dist/js/demo-theme.min.js?1684106062"></script>
-    <div class="page page-center" style='background: #04a41e;'>
+    <div class="page page-center">
         <div class="container container-tight py-4">
 
-            <div class="card card-md" style='border-radius: 50px 0px 50px 0px;'>
+            <div class="card card-md" style='border:solid 1px #04a41e; border-radius: 50px 50px 50px 50px;'>
                 <div class="card-body">
 
                     <div class="mb-5">
@@ -91,7 +91,7 @@ require_once 'core/config.php';
                             <div class='col-sm-8 d-flex justify-content-start'>
                                 <span style='font-weight: 900;'>
                                     <span style='font-size: xx-large; font-weight: bold;'>CHMSU</span> <br>
-                                    <span>Student Violations System</span>
+                                    <span>OSAS Student Violations</span>
                                 </span>
                             </div>
                         </div>

@@ -1,8 +1,8 @@
 -- --------------------------------------------------------
 -- Host:                         127.0.0.1
--- Server version:               10.4.32-MariaDB - mariadb.org binary distribution
+-- Server version:               10.4.11-MariaDB - mariadb.org binary distribution
 -- Server OS:                    Win64
--- HeidiSQL Version:             12.6.0.6765
+-- HeidiSQL Version:             12.1.0.6537
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -20,7 +20,7 @@ CREATE TABLE IF NOT EXISTS `tbl_courses` (
   `course_name` varchar(100) NOT NULL,
   `date_added` datetime NOT NULL,
   PRIMARY KEY (`course_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
 
 -- Dumping data for table student_violations_db.tbl_courses: ~3 rows (approximately)
 INSERT INTO `tbl_courses` (`course_id`, `course_name`, `date_added`) VALUES
@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS `tbl_offenses` (
   `cleared_by` int(11) NOT NULL,
   `date_added` datetime NOT NULL,
   PRIMARY KEY (`offense_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4;
 
 -- Dumping data for table student_violations_db.tbl_offenses: ~7 rows (approximately)
 INSERT INTO `tbl_offenses` (`offense_id`, `student_id`, `violation_id`, `offense_remarks`, `discplinary_action`, `offense_date`, `offense_status`, `offense_type`, `cleared_by`, `date_added`) VALUES
@@ -67,26 +67,26 @@ CREATE TABLE IF NOT EXISTS `tbl_students` (
   `user_id` int(11) NOT NULL,
   `date_added` datetime NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`student_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4;
 
 -- Dumping data for table student_violations_db.tbl_students: ~17 rows (approximately)
 INSERT INTO `tbl_students` (`student_id`, `student_fname`, `student_mname`, `student_lname`, `student_email`, `gender`, `year_level`, `course_id`, `section`, `user_id`, `date_added`) VALUES
-	(12, 'Ana', 'Pimentel', 'Alonzo', 'ana.pimentel@gmail.com', 'Female', 'First Year', 2, 'B', 18, '2025-01-21 16:39:29'),
-	(13, 'Maria Kate', 'Cruz', 'Paz', 'mariakate.cruz@gmail.com', 'Female', 'First Year', 2, 'A', 19, '2025-01-21 16:39:29'),
-	(14, 'Keno', 'Dela Cruz', 'Santos', 'juan.santos@example.com', 'Male', 'First Year', 2, 'B', 20, '2025-01-21 16:39:29'),
+	(12, 'Ana', 'Pimentel', 'Alonzo', 'arlynartus@gmail.com', 'Female', 'First Year', 2, 'B', 18, '2025-01-21 16:39:29'),
+	(13, 'Maria Kate', 'Cruz', 'Paz', 'arlynartus@gmail.com', 'Female', 'First Year', 2, 'A', 19, '2025-01-21 16:39:29'),
+	(14, 'Keno', 'Dela Cruz', 'Santos', 'limsiacolucille23@gmail.com', 'Male', 'First Year', 2, 'B', 20, '2025-01-21 16:39:29'),
 	(15, 'Maria Clara', 'Reyes', 'Hernandez', 'mariaclara.reyes@example.com', 'Female', 'First Year', 2, 'C', 21, '2025-01-21 16:39:29'),
 	(16, 'Carlos', 'Lopez', 'Garcia', 'carlos.lopez@example.com', 'Male', 'First Year', 2, 'C', 22, '2025-01-21 16:39:29'),
-	(17, 'Emilia', 'Ana', 'Alvarez', 'emilia.alvarez@example.com', 'Female', 'First Year', 2, 'A', 23, '2025-01-21 16:39:29'),
+	(17, 'Emilia', 'Ana', 'Alvarez', 'maryjoycornel18@gmail.com', 'Female', 'First Year', 2, 'A', 23, '2025-01-21 16:39:29'),
 	(18, 'Marcos', 'Esteban', 'Bautista', 'marcos.bautista@example.com', 'Male', 'First Year', 2, 'B', 24, '2025-01-21 16:39:29'),
-	(19, 'Sofia', 'Gracia', 'Hernandez', 'sofia.hernandez@example.com', 'Female', 'First Year', 2, 'C', 25, '2025-01-21 16:39:29'),
-	(20, 'David', 'Lee', 'Tomas', 'david.tomas@example.com', 'Male', 'First Year', 2, 'C', 26, '2025-01-21 16:39:29'),
+	(19, 'Sofia', 'Gracia', 'Hernandez', 'limsiacolucille23@gmail.com', 'Female', 'First Year', 2, 'C', 25, '2025-01-21 16:39:29'),
+	(20, 'David', 'Lee', 'Tomas', 'arlynartus@gmail.com', 'Male', 'First Year', 2, 'C', 26, '2025-01-21 16:39:29'),
 	(21, 'Olivia', 'Grace', 'Villanueva', 'olivia.villanueva@example.com', 'Female', 'First Year', 2, 'A', 27, '2025-01-21 16:39:29'),
 	(22, 'Andres', 'Santiago', 'Reyes', 'andres.reyes@example.com', 'Male', 'Second Year', 2, 'A', 28, '2025-01-21 16:40:58'),
 	(23, 'Beatriz', 'Maria', 'Cruz', 'beatriz.cruz@example.com', 'Female', 'Second Year', 2, 'B', 29, '2025-01-21 16:40:58'),
 	(24, 'Carlo', 'Luis', 'Valdez', 'carlo.valdez@example.com', 'Male', 'Third Year', 2, 'C', 30, '2025-01-21 16:42:19'),
 	(25, 'Daniel', 'Jose', 'Santos', 'daniel.santos@example.com', 'Male', 'Fourth Year', 2, 'D', 31, '2025-01-21 16:43:00'),
-	(26, 'Erika', 'Luz', 'Mendoza', 'erika.mendoza@example.com', 'Female', 'Fourth Year', 2, 'A', 32, '2025-01-21 16:43:00'),
-	(27, 'Felix', 'Xavier', 'Ortega', 'felix.ortega@example.com', 'Male', 'First Year', 3, 'B', 33, '2025-01-21 16:43:43'),
+	(26, 'Erika', 'Luz', 'Mendoza', 'maryjoycornel18@gmail.com', 'Female', 'Fourth Year', 2, 'A', 32, '2025-01-21 16:43:00'),
+	(27, 'Felix', 'Xavier', 'Ortega', 'maryjoycornel18@gmail.com', 'Male', 'First Year', 3, 'B', 33, '2025-01-21 16:43:43'),
 	(28, 'test', 'tes', 'test', 'qweqwe@gmail.com', 'Female', 'First Year', 2, '1', 34, '2025-01-29 14:30:56');
 
 -- Dumping structure for table student_violations_db.tbl_users
@@ -101,27 +101,27 @@ CREATE TABLE IF NOT EXISTS `tbl_users` (
   `password` text NOT NULL,
   `date_added` datetime DEFAULT current_timestamp(),
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4;
 
 -- Dumping data for table student_violations_db.tbl_users: ~18 rows (approximately)
 INSERT INTO `tbl_users` (`user_id`, `user_fname`, `user_mname`, `user_lname`, `user_category`, `user_email`, `username`, `password`, `date_added`) VALUES
 	(2, 'Juan', '', 'Dela Cruz', 'A', '', 'admin', '0cc175b9c0f1b6a831c399e269772661', '2024-05-26 19:56:25'),
-	(18, 'Ana', 'Pimentel', 'Alonzo', 'S', 'ana.pimentel@gmail.com', 'ana', '827ccb0eea8a706c4c34a16891f84e7b', '2025-01-21 16:39:29'),
-	(19, 'Maria Kate', 'Cruz', 'Paz', 'S', '', 'maria kate', '827ccb0eea8a706c4c34a16891f84e7b', '2025-01-21 16:39:29'),
-	(20, 'Keno', 'Dela Cruz', 'Santos', 'S', '', 'keno', '827ccb0eea8a706c4c34a16891f84e7b', '2025-01-21 16:39:29'),
+	(18, 'Ana', 'Pimentel', 'Alonzo', 'S', 'arlynartus@gmail.com', 'ana', '827ccb0eea8a706c4c34a16891f84e7b', '2025-01-21 16:39:29'),
+	(19, 'Maria Kate', 'Cruz', 'Paz', 'S', 'arlynartus@gmail.com', 'maria kate', '827ccb0eea8a706c4c34a16891f84e7b', '2025-01-21 16:39:29'),
+	(20, 'Keno', 'Dela Cruz', 'Santos', 'S', 'limsiacolucille23@gmail.com', 'keno', '827ccb0eea8a706c4c34a16891f84e7b', '2025-01-21 16:39:29'),
 	(21, 'Maria Clara', 'Reyes', 'Hernandez', 'S', '', 'maria clara', '827ccb0eea8a706c4c34a16891f84e7b', '2025-01-21 16:39:29'),
 	(22, 'Carlos', 'Lopez', 'Garcia', 'S', '', '', '827ccb0eea8a706c4c34a16891f84e7b', '2025-01-21 16:39:29'),
-	(23, 'Emilia', 'Ana', 'Alvarez', 'S', '', 'emilia', '827ccb0eea8a706c4c34a16891f84e7b', '2025-01-21 16:39:29'),
+	(23, 'Emilia', 'Ana', 'Alvarez', 'S', 'maryjoycornel18@gmail.com', 'emilia', '827ccb0eea8a706c4c34a16891f84e7b', '2025-01-21 16:39:29'),
 	(24, 'Marcos', 'Esteban', 'Bautista', 'S', '', 'marcos', '827ccb0eea8a706c4c34a16891f84e7b', '2025-01-21 16:39:29'),
-	(25, 'Sofia', 'Gracia', 'Hernandez', 'S', '', 'sofia', '827ccb0eea8a706c4c34a16891f84e7b', '2025-01-21 16:39:29'),
-	(26, 'David', 'Lee', 'Tomas', 'S', '', '', '827ccb0eea8a706c4c34a16891f84e7b', '2025-01-21 16:39:29'),
+	(25, 'Sofia', 'Gracia', 'Hernandez', 'S', 'limsiacolucille23@gmail.com', 'sofia', '827ccb0eea8a706c4c34a16891f84e7b', '2025-01-21 16:39:29'),
+	(26, 'David', 'Lee', 'Tomas', 'S', 'arlynartus@gmail.com', '', '827ccb0eea8a706c4c34a16891f84e7b', '2025-01-21 16:39:29'),
 	(27, 'Olivia', 'Grace', 'Villanueva', 'S', '', 'olivia', '827ccb0eea8a706c4c34a16891f84e7b', '2025-01-21 16:39:29'),
 	(28, 'Andres', 'Santiago', 'Reyes', 'S', '', 'andres', '827ccb0eea8a706c4c34a16891f84e7b', '2025-01-21 16:40:58'),
 	(29, 'Beatriz', 'Maria', 'Cruz', 'S', '', 'beatriz', '827ccb0eea8a706c4c34a16891f84e7b', '2025-01-21 16:40:58'),
 	(30, 'Carlo', 'Luis', 'Valdez', 'S', '', 'carlo1', '827ccb0eea8a706c4c34a16891f84e7b', '2025-01-21 16:42:19'),
 	(31, 'Daniel', 'Jose', 'Santos', 'S', '', 'daniel', '827ccb0eea8a706c4c34a16891f84e7b', '2025-01-21 16:43:00'),
-	(32, 'Erika', 'Luz', 'Mendoza', 'S', '', 'erika', '827ccb0eea8a706c4c34a16891f84e7b', '2025-01-21 16:43:00'),
-	(33, 'Felix', 'Xavier', 'Ortega', 'S', '', 'felix', '827ccb0eea8a706c4c34a16891f84e7b', '2025-01-21 16:43:43'),
+	(32, 'Erika', 'Luz', 'Mendoza', 'S', 'maryjoycornel18@gmail.com', 'erika', '827ccb0eea8a706c4c34a16891f84e7b', '2025-01-21 16:43:00'),
+	(33, 'Felix', 'Xavier', 'Ortega', 'S', 'maryjoycornel18@gmail.com', 'felix', '827ccb0eea8a706c4c34a16891f84e7b', '2025-01-21 16:43:43'),
 	(34, 'test', 'tes', 'test', 'S', 'qweqwe@gmail.com', 'test', '098f6bcd4621d373cade4e832627b4f6', '2025-01-29 14:30:56');
 
 -- Dumping structure for table student_violations_db.tbl_violations
@@ -131,7 +131,7 @@ CREATE TABLE IF NOT EXISTS `tbl_violations` (
   `violation_desc` text NOT NULL,
   `date_added` datetime NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`violation_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4;
 
 -- Dumping data for table student_violations_db.tbl_violations: ~9 rows (approximately)
 INSERT INTO `tbl_violations` (`violation_id`, `violation_name`, `violation_desc`, `date_added`) VALUES
