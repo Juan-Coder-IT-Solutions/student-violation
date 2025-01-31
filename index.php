@@ -33,6 +33,7 @@ $user_id = $_SESSION['dvsa_user_id'];
   <link rel="stylesheet" href="dist/mdi/css/materialdesignicons.min.css" />
   <link href="dist/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
   <link rel="stylesheet" href="dist/sweetalert/sweetalert.css">
+  <link rel="stylesheet" href="dist/sweetalert/sweetalert.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
   <style>
     @import url('https://rsms.me/inter/inter.css');
 
@@ -115,19 +116,19 @@ $user_id = $_SESSION['dvsa_user_id'];
       </header>
       <header class="navbar-expand-md">
         <div class="collapse navbar-collapse" id="navbar-menu">
-          
-        <?php if ($_SESSION['user_category'] != "S") { ?>
-          <div class="navbar">
-            <div class="container-xl">
-              <?php include "components/navbar.php"; ?>
 
-              <div class="my-2 my-md-0 flex-grow-1 flex-md-grow-0 order-first order-md-last">
+          <?php if ($_SESSION['user_category'] != "S") { ?>
+            <div class="navbar">
+              <div class="container-xl">
+                <?php include "components/navbar.php"; ?>
 
+                <div class="my-2 my-md-0 flex-grow-1 flex-md-grow-0 order-first order-md-last">
+
+                </div>
               </div>
             </div>
-          </div>
-          
-          <?php }?>
+
+          <?php } ?>
         </div>
       </header>
     </div>
@@ -147,7 +148,7 @@ $user_id = $_SESSION['dvsa_user_id'];
                 <li class="list-inline-item">
                   Copyright &copy; <?php echo date('Y'); ?>
                   <a href="." class="link-secondary">CHMSU-Alijis</a>.
-                  All rights reserved. 
+                  All rights reserved.
                 </li>
               </ul>
             </div>
@@ -335,9 +336,10 @@ $user_id = $_SESSION['dvsa_user_id'];
         this.reset();
       });
 
-      $(".user_input").prop('required',true);
+      $(".user_input").prop('required', true);
       $(".div_username").show();
       $(".div_password").show();
+      $(".div_user_acc").show();
       $("#modal_entry").modal("show");
     }
 
@@ -358,6 +360,21 @@ $user_id = $_SESSION['dvsa_user_id'];
         }
       }
     }
+
+    document.getElementById("togglePassword").addEventListener("click", function() {
+      var passwordField = document.getElementById("password");
+      var eyeIcon = document.getElementById("eyeIcon");
+
+      if (passwordField.type === "password") {
+        passwordField.type = "text";
+        eyeIcon.classList.remove("fa-eye-slash");
+        eyeIcon.classList.add("fa-eye");
+      } else {
+        passwordField.type = "password";
+        eyeIcon.classList.remove("fa-eye");
+        eyeIcon.classList.add("fa-eye-slash");
+      }
+    });
   </script>
 </body>
 

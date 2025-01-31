@@ -83,8 +83,13 @@
             </div>
             <div class="col-sm-12 div_user_acc">
               <div class="mb-3">
-                <label class="form-label">Password <strong style="color:red;">*</strong></label>
-                <input type="password" class="form-control user_input" id="password" name="password" autocomplete="off" required>
+                <label class="form-label">Password</label>
+                <div class="input-group">
+                  <input type="password" class="form-control user_input" name="password" id="password" required placeholder="Your password" autocomplete="off">
+                  <span class="input-group-text eye-icon" id="togglePassword">
+                    <i class="fa fa-eye-slash" id="eyeIcon"></i>
+                  </span>
+                </div>
               </div>
             </div>
           </div>

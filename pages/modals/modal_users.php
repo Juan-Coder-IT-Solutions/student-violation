@@ -28,16 +28,27 @@
                 <input type="text" class="form-control" id="user_lname" name="user_lname" autocomplete="off" required>
               </div>
             </div>
+            <div class="col-sm-12">
+              <div class="mb-3">
+                <label class="form-label">Email <strong style="color:red;">*</strong></label>
+                <input type="email" class="form-control" id="user_email" name="user_email" autocomplete="off" required>
+              </div>
+            </div>
             <div class="col-sm-6">
               <div class="mb-3">
                 <label class="form-label">Username <strong style="color:red;">*</strong></label>
                 <input type="text" class="form-control" id="username" name="username" autocomplete="off" required>
               </div>
             </div>
-            <div class="col-sm-6" id="div_password">
+            <div class="col-sm-6 div_password" id="div_password">
               <div class="mb-3">
-                <label class="form-label">Password <strong style="color:red;">*</strong></label>
-                <input type="password" class="form-control" id="password" name="password" autocomplete="off" required>
+                <label class="form-label">Password</label>
+                <div class="input-group">
+                  <input type="password" class="form-control" name="password" id="password" required placeholder="Your password" autocomplete="off">
+                  <span class="input-group-text eye-icon" id="togglePassword">
+                    <i class="fa fa-eye-slash" id="eyeIcon"></i>
+                  </span>
+                </div>
               </div>
             </div>
           </div>

@@ -188,6 +188,7 @@ require_once 'core/config.php';
                 url: "ajax/forgetpassword.php",
                 data: $("#frm_forgot_password").serialize(),
                 success: function(data) {
+                console.log(data)
                     if (data == -1) {
                         alert("We couldn't find an account with this email.");
                     } else if (data == -2) {

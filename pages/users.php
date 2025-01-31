@@ -140,6 +140,7 @@
         $("#username").val(json.username);
         $("#password").val(json.password);
         $("#user_id").val(json.user_id);
+        $("#user_email").val(json.user_email);
         $(".modal_type").val("update");
         $("#div_password").hide();
       }
@@ -225,4 +226,6 @@
     });
 
   }
+
+  
 </script>

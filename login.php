@@ -21,7 +21,8 @@ if (isset($_SESSION['dvsa_user_id'])) {
     <link href="./dist/css/tabler-payments.min.css?1684106062" rel="stylesheet" />
     <link href="./dist/css/tabler-vendors.min.css?1684106062" rel="stylesheet" />
     <link href="./dist/css/demo.min.css?1684106062" rel="stylesheet" />
-    <link rel="stylesheet" href="dist/sweetalert/sweetalert.css">
+    <link rel="stylesheet" href="dist/sweetalert/sweetalert.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
     <style>
         @import url('https://rsms.me/inter/inter.css');
 
@@ -84,7 +85,12 @@ if (isset($_SESSION['dvsa_user_id'])) {
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Password</label>
-                            <input type="password" class="form-control" name="password" required placeholder="Your password" autocomplete="off">
+                            <div class="input-group">
+                                <input type="password" class="form-control" name="password" id="password" required placeholder="Your password" autocomplete="off">
+                                <span class="input-group-text eye-icon" id="togglePassword">
+                                    <i class="fa fa-eye-slash" id="eyeIcon"></i>
+                                </span>
+                            </div>
                         </div>
                         <div class="mb-3 form-check">
                             <input type="checkbox" class="form-check-input" id="remember_me" name="remember_me">
@@ -155,6 +161,21 @@ if (isset($_SESSION['dvsa_user_id'])) {
                     }
                 }
             });
+        });
+
+        document.getElementById("togglePassword").addEventListener("click", function() {
+            var passwordField = document.getElementById("password");
+            var eyeIcon = document.getElementById("eyeIcon");
+
+            if (passwordField.type === "password") {
+                passwordField.type = "text";
+                eyeIcon.classList.remove("fa-eye-slash");
+                eyeIcon.classList.add("fa-eye");
+            } else {
+                passwordField.type = "password";
+                eyeIcon.classList.remove("fa-eye");
+                eyeIcon.classList.add("fa-eye-slash");
+            }
         });
     </script>
 </body>
