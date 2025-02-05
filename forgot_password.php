@@ -257,6 +257,7 @@ require_once 'core/config.php';
             e.preventDefault();
             var newPassword = $("#newPassword").val();
             var confirmPassword = $("#confirmPassword").val();
+            var user_id = $("#user_id").val();
 
             if (newPassword !== confirmPassword) {
                 alert("Passwords do not match.");
