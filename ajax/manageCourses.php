@@ -5,6 +5,7 @@ $type = $mysqli_connect->real_escape_string($_POST['type']);
 // $user_id  = $_SESSION['rm_user_id'];
 
 $course_id = $mysqli_connect->real_escape_string($_POST['course_id']);
+$degree_id = $mysqli_connect->real_escape_string($_POST['degree_id']);
 $date = getCurrentDate();
 
 if($type == "add"){
@@ -15,7 +16,7 @@ if($type == "add"){
     if ($count_rows && $count_rows[0] > 0) {
         echo 2;
     }else{
-        $sql = $mysqli_connect->query("INSERT INTO tbl_courses SET course_name='$course_name',date_added='$date'") or die(mysqli_error());
+        $sql = $mysqli_connect->query("INSERT INTO tbl_courses SET course_name='$course_name',degree_id='$degree_id',date_added='$date'") or die(mysqli_error());
        
         if($sql){
             $t_id = $mysqli_connect->insert_id;
@@ -30,7 +31,7 @@ if($type == "add"){
     if($count_rows && $count_rows[0] > 0){
         echo 2;
     }else{
-        $sql = $mysqli_connect->query("UPDATE tbl_courses SET course_name='$course_name' WHERE course_id ='$course_id'") or die(mysqli_error());
+        $sql = $mysqli_connect->query("UPDATE tbl_courses SET course_name='$course_name',degree_id='$degree_id' WHERE course_id ='$course_id'") or die(mysqli_error());
         if($sql){
             echo 1;
         }else{

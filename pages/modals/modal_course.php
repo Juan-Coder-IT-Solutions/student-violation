@@ -10,12 +10,31 @@
           <div class="row">
             <input type="hidden" class="form-control modal_type" name="type">
             <input type="hidden" class="form-control" id="course_id" name="course_id">
+
+
             <div class="col-sm-12">
               <div class="mb-3">
                 <label class="form-label">Course <strong style="color:red;">*</strong></label>
                 <input type="text" class="form-control" id="course_name" name="course_name" autocomplete="off" required>
               </div>
             </div>
+
+            <div class="col-sm-12">
+              <div class="mb-3">
+                <label class="form-label">Degree Program <strong style="color:red;">*</strong></label>
+                <select class="select2 form-control" id="degree_id" name="degree_id" required>
+                  <option value="">Please Select</option>
+                  <?php
+                  $fetch_degree = $mysqli_connect->query("SELECT * FROM tbl_degree") or die(mysqli_error());
+                  while ($dRow = $fetch_degree->fetch_array()) { ?>
+                    <option value='<?= $dRow['degree_id'] ?>'>
+                      <?= $dRow['degree_name'] ?>
+                    </option>";
+                  <?php } ?>
+                </select>
+              </div>
+            </div>
+
           </div>
         </div>
         <div class="modal-footer">

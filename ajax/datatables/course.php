@@ -9,6 +9,8 @@ while( $row = $fetch_products->fetch_array() ){
     $list['count'] = $count++;
     $list['course_id'] = $row['course_id'];
     $list['course_name'] = $row['course_name'];
+    $list['degree'] = degree_name($row['degree_id']);
+    
     $list['date_added'] = date('F d,Y', strtotime($row['date_added']));
 	array_push($response['data'], $list);
 }

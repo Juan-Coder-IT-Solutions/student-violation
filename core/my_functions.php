@@ -129,6 +129,20 @@ function violation_name($id)
 	}
 }
 
+function degree_name($id)
+{
+
+	global $mysqli_connect;
+
+	$fetchData = $mysqli_connect->query("SELECT degree_name FROM `tbl_degree` WHERE degree_id ='$id'");
+	if ($fetchData->num_rows > 0) {
+		$row = $fetchData->fetch_array();
+		return $row[0];
+	} else {
+		return "---";
+	}
+}
+
 function task_row($id)
 {
 

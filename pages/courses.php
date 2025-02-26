@@ -42,6 +42,7 @@
                                             <th style='width: 5px;'></th>
                                             <th>#</th>
                                             <th>Course</th>
+                                            <th>Degree Program</th>
                                             <th>Date Added</th>
                                         </tr>
                                     </thead>
@@ -135,6 +136,7 @@
         console.log(data);
         $("#course_name").val(json.course_name);
         $("#course_id").val(json.course_id);
+        $("#degree_id").val(json.degree_id);
         $(".modal_type").val("update");
       }
     });
@@ -208,6 +210,9 @@
         },
         {
           "data": "course_name"
+        },
+        {
+          "data": "degree"
         },
         {
           "data": "date_added"
