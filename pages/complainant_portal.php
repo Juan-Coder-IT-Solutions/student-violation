@@ -19,6 +19,7 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="row g-2 align-items-center">
+                              <?php if($user_category == "A" || $user_category == "C"){ ?>
                                 <div class="col-6 col-sm-4 col-md-2 col-xl py-3">
                                     <a href="#" onclick="addEntry()" class="btn btn-primary w-100">
                                         Add Complaint
@@ -29,6 +30,7 @@
                                         Delete
                                     </a>
                                 </div>
+                              <?php } ?>
                             </div>
                         </div>
                         <div class="card-body">
@@ -202,12 +204,21 @@
       "columns": [
         {
           "mRender": function(data, type, row) {
-            return "<div class='form-check form-check-success'><label class='form-check-label'><input type='checkbox' value=" + row.complaint_id + " class='dt_id form-check-input'><i class='input-helper'></i></label></div>";
+            if(row.hide_this == "A" || row.hide_this == "C"){
+              return "<div class='form-check form-check-success'><label class='form-check-label'><input type='checkbox' value=" + row.complaint_id + " class='dt_id form-check-input'><i class='input-helper'></i></label></div>";
+            }else{
+              return "";
+            }
           }
         },
         {
           "mRender": function(data, type, row) {
-            return "<center><button class='btn btn-primary' onclick='getEntryDetails(" + row.complaint_id + ")'><span class='mdi mdi-grease-pencil'></span></button></center>";
+            if(row.hide_this == "A" || row.hide_this == "C"){
+              return "<center><button class='btn btn-primary' onclick='getEntryDetails(" + row.complaint_id + ")'><span class='mdi mdi-grease-pencil'></span></button></center>";
+            }else{
+              return "";
+            }
+           
           }
         },
         {

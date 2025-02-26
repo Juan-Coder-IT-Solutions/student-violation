@@ -1,6 +1,6 @@
 <?php
 require_once '../../core/config.php';
-$fetch = $mysqli_connect->query("SELECT * FROM tbl_users WHERE user_category !='S'") or die(mysqli_error());
+$fetch = $mysqli_connect->query("SELECT * FROM tbl_users") or die(mysqli_error());
 $response['data'] = array();
 $count = 1;
 // $user_id = $_SESSION['rm_user_id'];

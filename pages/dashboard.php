@@ -28,6 +28,7 @@ if ($_SESSION['user_category'] != "S") {
         </div>
 
         <!-- Statistic Cards Section -->
+        <?php if($user_category == "A"){ ?>
         <div class="col-12">
           <div class="row row-cards g-3">
             <!-- Users -->
@@ -119,6 +120,7 @@ if ($_SESSION['user_category'] != "S") {
             </div>
           </div>
         </div>
+        <?php } ?>
         
       </div>
     </div>

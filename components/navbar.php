@@ -1,4 +1,5 @@
 <ul class="navbar-nav">
+
   <li class="nav-item <?= ($page == "" || $page == "dashboard" ? "active" : "") ?>">
     <a class="nav-link" href="./">
       <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
@@ -14,6 +15,9 @@
       </span>
     </a>
   </li>
+
+  <?php //ADMIN
+   if($user_category == "A"){ ?>
   <li class="nav-item <?= ($page == "courses" ? "active" : "") ?>">
     <a class="nav-link" href="index.php?page=courses">
       <span class="nav-link-icon d-md-none d-lg-inline-block">
@@ -31,6 +35,10 @@
       </span>
     </a>
   </li>
+  <?php } ?>
+
+  <?php //ADMIN
+   if($user_category == "A"){ ?>
   <li class="nav-item <?= ($page == "degree" ? "active" : "") ?>">
     <a class="nav-link" href="index.php?page=degree">
       <span class="nav-link-icon d-md-none d-lg-inline-block">
@@ -48,6 +56,10 @@
       </span>
     </a>
   </li>
+  <?php } ?>
+
+  <?php //ADMIN
+   if($user_category == "A"){ ?>
   <li class="nav-item <?= ($page == "users" ? "active" : "") ?>">
     <a class="nav-link" href="index.php?page=users">
       <span class="nav-link-icon d-md-none d-lg-inline-block">
@@ -66,6 +78,10 @@
       </span>
     </a>
   </li>
+  <?php } ?>
+
+  <?php //ADMIN
+   if($user_category == "A"){ ?>
   <li class="nav-item <?= ($page == "students" ? "active" : "") ?>">
     <a class="nav-link" href="index.php?page=students">
       <span class="nav-link-icon d-md-none d-lg-inline-block">
@@ -81,6 +97,10 @@
       </span>
     </a>
   </li>
+  <?php } ?>
+
+  <?php //ADMIN
+   if($user_category == "A"){ ?>
   <li class="nav-item <?= ($page == "violations" ? "active" : "") ?>">
     <a class="nav-link" href="index.php?page=violations">
       <span class="nav-link-icon d-md-none d-lg-inline-block">
@@ -94,7 +114,10 @@
       </span>
     </a>
   </li>
+  <?php } ?>
 
+  <?php //ADMIN
+   if($user_category == "A"){ ?>
   <li class="nav-item <?= ($page == "offenses" ? "active" : "") ?>">
     <a class="nav-link" href="index.php?page=offenses">
       <span class="nav-link-icon d-md-none d-lg-inline-block">
@@ -110,7 +133,11 @@
       </span>
     </a>
   </li>
+  <?php } ?>
 
+  <?php //ADMIN, COMPLAINANT
+    if($user_category == "A" || $user_category == "C"  || $user_category == "S"){ 
+  ?>
   <li class="nav-item <?= ($page == "complainant_portal" ? "active" : "") ?>">
     <a class="nav-link" href="index.php?page=complainant_portal">
       <span class="nav-link-icon d-md-none d-lg-inline-block">
@@ -126,7 +153,10 @@
       </span>
     </a>
   </li>
-  
+  <?php } ?>
+
+  <?php //ADMIN
+if($user_category == "A" || $user_category == "DO" || $user_category == "G" || $user_category == "D"){ ?>
   <li class="nav-item dropdown  <?= ($page == "violation-report" || $page == "student-violation-report" ? "active" : "") ?>">
     <a class="nav-link dropdown-toggle" href="#navbar-help" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false">
       <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler.io/icons/icon/lifebuoy -->
@@ -152,4 +182,5 @@
       </a>
     </div>
   </li>
+  <?php } ?>
 </ul>

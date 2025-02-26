@@ -6,6 +6,8 @@ $page = (isset($_GET['page']) && $_GET['page'] != '') ? $_GET['page'] : '';
 checkLoginStatus();
 
 $user_id = $_SESSION['dvsa_user_id'];
+$user_category = $_SESSION['user_category'];
+
 ?>
 <!doctype html>
 <!--
@@ -117,7 +119,7 @@ $user_id = $_SESSION['dvsa_user_id'];
       <header class="navbar-expand-md">
         <div class="collapse navbar-collapse" id="navbar-menu">
 
-          <?php if ($_SESSION['user_category'] != "S") { ?>
+         
             <div class="navbar">
               <div class="container-xl">
                 <?php include "components/navbar.php"; ?>
@@ -128,7 +130,6 @@ $user_id = $_SESSION['dvsa_user_id'];
               </div>
             </div>
 
-          <?php } ?>
         </div>
       </header>
     </div>
