@@ -8,8 +8,18 @@ while( $row = $fetch->fetch_array() ){
 
     if($row['user_category'] == "S"){
         $category = "Students";
+    }else if($row['user_category'] == "C"){
+        $category = "Complainant";
+    }else if($row['user_category'] == "D"){
+        $category = "Dean";
+    }else if($row['user_category'] == "DO"){
+        $category = "Disciplinary Officer";
+    }else if($row['user_category'] == "G"){
+        $category = "Counselor/Guidance";
+    }else if($row['user_category'] == "A"){
+        $category = "Admin/OSA";
     }else{
-        $category = "Admin";
+        $category = "";
     }
     
 	$list = array(); 

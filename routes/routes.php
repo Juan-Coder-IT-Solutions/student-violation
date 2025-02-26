@@ -3,6 +3,8 @@
 		require view.'dashboard.php';
 	}else if($page == 'users'){
 		require view.'users.php';
+	}else if($page == 'complainant_portal'){
+		require view.'complainant_portal.php';
 	}else if($page == 'courses'){
 		require view.'courses.php';
 	}else if($page == 'violations'){

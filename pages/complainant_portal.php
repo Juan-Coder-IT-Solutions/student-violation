@@ -5,7 +5,7 @@
             <div class="row g-2 align-items-center">
                 <div class="col">
                     <h2 class="page-title">
-                        Users
+                        Complainant Portal
                     </h2>
                 </div>
             </div>
@@ -21,7 +21,7 @@
                             <div class="row g-2 align-items-center">
                                 <div class="col-6 col-sm-4 col-md-2 col-xl py-3">
                                     <a href="#" onclick="addEntry()" class="btn btn-primary w-100">
-                                        Add Users
+                                        Add Complaint
                                     </a>
                                 </div>
                                 <div class="col-6 col-sm-4 col-md-2 col-xl py-3">
@@ -41,9 +41,11 @@
                                             </th>
                                             <th style='width: 5px;'></th>
                                             <th>#</th>
-                                            <th>Full Name</th>
-                                            <th>Username</th>
-                                            <th>Catergory</th>
+                                            <th>Complainee</th>
+                                            <th>Complainant</th>
+                                            <th>Violation</th>
+                                            <th>Description</th>
+                                            <th>File Preview</th>
                                             <th>Date Added</th>
                                         </tr>
                                     </thead>
@@ -58,7 +60,7 @@
         </div>
     </div>
 </div>
-<?php require_once 'modals/modal_users.php'; ?>
+<?php require_once 'modals/modal_complaints.php'; ?>
 <script>
   $(document).ready(function() {
     getEntry();
@@ -66,8 +68,8 @@
 
   function deleteEntry() {
     var count_checked = $(".dt_id:checked").length;
-    var tb = "tbl_users";
-    var keyword = "user_id";
+    var tb = "tbl_complaints";
+    var keyword = "complaint_id";
 
     if (count_checked > 0) {
       swal({
@@ -121,8 +123,8 @@
 
   function getEntryDetails(id) {
     $("#modal_entry").modal("show");
-    var tb = "tbl_users";
-    var keyword = "user_id";
+    var tb = "tbl_complaints";
+    var keyword = "complaint_id";
 
     $.ajax({
       type: "POST",
@@ -135,57 +137,54 @@
       success: function(data) {
         var json = JSON.parse(data);
         console.log(data);
-        $("#user_fname").val(json.user_fname);
-        $("#user_mname").val(json.user_mname);
-        $("#user_lname").val(json.user_lname);
-        $("#username").val(json.username);
-        $("#password").val(json.password);
-        $("#user_id").val(json.user_id);
-        $("#user_email").val(json.user_email);
+        $("#complaint_id").val(json.complaint_id);
+        $("#complainee_id").val(json.complainee_id);
+        $("#violation_id").val(json.violation_id);
+        $("#remarks").val(json.remarks);
         $(".modal_type").val("update");
-        $("#div_password").hide();
       }
     });
   }
 
-
-
   $("#frm_add").submit(function(e) {
     e.preventDefault();
     $("#btn_submit_entry").prop("disabled", true);
+    
     var type = $(".modal_type").val();
+    var formData = new FormData(this); // Use FormData to handle file uploads
+
     $.ajax({
-      type: "POST",
-      url: "ajax/manageUser.php",
-      data: $("#frm_add").serialize(),
-      success: function(data) {
-        if (data == 1) {
-          if (type == "add") {
-            success_add();
-
-            $('#frm_add').each(function() {
-              this.reset();
-            });
-          } else {
-            success_update();
-            $('#frm_add').each(function() {
-              this.reset();
-            });
-          }
-          getEntry();
-          $("#modal_entry").modal("hide");
-        } else if (data == 2) {
-          entry_already_exists();
-        } else {
-          failed_query("Users");
-          alert(data);
+        type: "POST",
+        url: "ajax/manageComplaints.php",
+        data: formData,
+        contentType: false, // Important for file upload
+        processData: false, // Prevent jQuery from processing the data
+        success: function(data) {
+            if (data == 1) {
+                if (type == "add") {
+                    success_add();
+                } else {
+                    success_update();
+                }
+                $('#frm_add')[0].reset(); // Reset form after submission
+                getEntry();
+                $("#modal_entry").modal("hide");
+            } else if (data == 2) {
+                entry_already_exists();
+            } else {
+                failed_query("Complainant Portal");
+                alert(data);
+            }
+            $("#btn_submit_entry").prop("disabled", false);
+        },
+        error: function(xhr, status, error) {
+            alert("An error occurred: " + xhr.responseText);
+            $("#btn_submit_entry").prop("disabled", false);
         }
-        $("#btn_submit_entry").prop("disabled", false);
-      }
-
     });
+});
 
-  });
+
 
   function getEntry() {
     $("#dt_details").DataTable().destroy();
@@ -194,7 +193,7 @@
       "responsive": true,
       "ajax": {
         "type": "POST",
-        "url": "ajax/datatables/users.php",
+        "url": "ajax/datatables/complainant_portal.php",
         "dataSrc": "data",
         "data": {
           //type:type
@@ -203,26 +202,35 @@
       "columns": [
         {
           "mRender": function(data, type, row) {
-            return "<div class='form-check form-check-success'><label class='form-check-label'><input type='checkbox' value=" + row.user_id + " class='dt_id form-check-input'><i class='input-helper'></i></label></div>";
+            return "<div class='form-check form-check-success'><label class='form-check-label'><input type='checkbox' value=" + row.complaint_id + " class='dt_id form-check-input'><i class='input-helper'></i></label></div>";
           }
         },
         {
           "mRender": function(data, type, row) {
-            return "<center><button class='btn btn-primary' onclick='getEntryDetails(" + row.user_id + ")'><span class='mdi mdi-grease-pencil'></span></button></center>";
+            return "<center><button class='btn btn-primary' onclick='getEntryDetails(" + row.complaint_id + ")'><span class='mdi mdi-grease-pencil'></span></button></center>";
           }
         },
         {
           "data": "count"
         },
         {
-          "data": "full_name"
+          "data": "complainee"
         },
         {
-          "data": "username"
+          "data": "cimplainant"
         },
         {
-          "data": "category"
+          "data": "violation"
         },
+        {
+          "data": "remarks"
+        },
+        {
+                "data": "file", // Add file preview column
+                "mRender": function(data, type, row) {
+                    return row.file ? row.file : "No File";
+                }
+            },
         {
           "data": "date_added"
         }
@@ -230,6 +238,4 @@
     });
 
   }
-
-  
 </script>

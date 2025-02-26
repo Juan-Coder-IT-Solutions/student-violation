@@ -28,12 +28,27 @@
                 <input type="text" class="form-control" id="user_lname" name="user_lname" autocomplete="off" required>
               </div>
             </div>
-            <div class="col-sm-12">
+            <div class="col-sm-6">
               <div class="mb-3">
                 <label class="form-label">Email <strong style="color:red;">*</strong></label>
                 <input type="email" class="form-control" id="user_email" name="user_email" autocomplete="off" required>
               </div>
             </div>
+            <div class="col-sm-6">
+              <div class="mb-3">
+                <label class="form-label">Catergory <strong style="color:red;">*</strong></label>
+                <select class="select2 form-control" id="user_category" name="user_category" required>
+                  <option value="">Please Select</option>
+                  <option value="A">Admin/OSA</option>
+                  <option value="C">Complainant</option>
+                  <option value="D">Dean</option>
+                  <option value="DO">Disciplinary Officer</option>
+                  <option value="G">Counselor/Guidance</option>
+                  <option value="S">Student</option>
+                </select>
+              </div>
+            </div>
+
             <div class="col-sm-6">
               <div class="mb-3">
                 <label class="form-label">Username <strong style="color:red;">*</strong></label>

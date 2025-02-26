@@ -97,7 +97,7 @@ function getUserCategory($user_id)
 		return "---";
 	}else {
 	$row = $fetchData->fetch_assoc();
-	return $row['user_category'] == "A" ? "Admin" : "Student";
+	   return $row['user_category'] == "S" ? "Student" : (($row['user_category'] == "C")? "Complainant" : (($row['user_category'] == "D")? "Dean" : (($row['user_category'] == "DO")? "Disciplinary Officer": (($row['user_category']== "G")? "Counselor/Guidance": (($row['user_category']=="A")? "Admin/OSA":  "---")))));
 	}
 }
 
