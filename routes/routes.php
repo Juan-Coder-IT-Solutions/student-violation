@@ -7,6 +7,8 @@
 		require view.'complainant_portal.php';
 	}else if($page == 'courses'){
 		require view.'courses.php';
+	}else if($page == 'degree'){
+		require view.'degree.php';
 	}else if($page == 'violations'){
 		require view.'violations.php';
 	}else if($page == 'violation-report'){
