@@ -9,7 +9,7 @@ if($query){
     $fetch_complaints = $mysqli_connect->query("SELECT * FROM tbl_complaints WHERE complaint_id = '$id'");
     $c_row = $fetch_complaints->fetch_assoc();
     $complainee = $c_row["complainee"];
-    $complainee_program = $c_row["complainee_program"];
+    $complainee_program = degree_name($c_row["complainee_program"]);
     
     if($status == "A"){
         $fetch = $mysqli_connect->query("SELECT user_id FROM tbl_users WHERE user_category='DO'") or die(mysqli_error());
