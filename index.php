@@ -8,6 +8,9 @@ checkLoginStatus();
 $user_id = $_SESSION['dvsa_user_id'];
 $user_category = $_SESSION['user_category'];
 
+$fetchUser__ = $mysqli_connect->query("SELECT * FROM tbl_users WHERE user_id='$user_id'") or die(mysqli_error());
+$user__row = $fetchUser__->fetch_array();
+
 ?>
 <!doctype html>
 <!--
@@ -35,7 +38,8 @@ $user_category = $_SESSION['user_category'];
   <link rel="stylesheet" href="dist/mdi/css/materialdesignicons.min.css" />
   <link href="dist/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
   <link rel="stylesheet" href="dist/sweetalert/sweetalert.css">
-  <link rel="stylesheet" href="dist/sweetalert/sweetalert.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link rel="stylesheet" href="dist/sweetalert/sweetalert.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
   <style>
     @import url('https://rsms.me/inter/inter.css');
 
@@ -73,16 +77,54 @@ $user_category = $_SESSION['user_category'];
             Carlos Hilado Memorial State University
           </h1>
           <div class="navbar-nav flex-row order-md-last">
+            <?php if ($user_category != "C") { ?>
+              <div class="d-none d-md-flex position-relative">
+                <a href="#" class="nav-link px-0" onclick="toggleChatDropdown(event)" aria-label="Show messages">
+                  <!-- Message Dots SVG Icon -->
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-message-dots">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <path d="M12 11v.01" />
+                    <path d="M8 11v.01" />
+                    <path d="M16 11v.01" />
+                    <path d="M18 4a3 3 0 0 1 3 3v8a3 3 0 0 1 -3 3h-5l-5 3v-3h-2a3 3 0 0 1 -3 -3v-8a3 3 0 0 1 3 -3z" />
+                  </svg>
+                </a>
 
+                <!-- Dropdown Menu -->
+                <ul id="chatDropdown" class="dropdown-menu dropdown-menu-end shadow p-2" style="min-width: 320px; display: none; position: absolute; top: 100%; right: 0;">
+                  <li><a href="index.php?page=messages" class="dropdown-item">View All Messages</a></li>
+                </ul>
+              </div>
+            <?php } ?>
+            <script>
+              function toggleChatDropdown(event) {
+                event.preventDefault();
+                var dropdown = document.getElementById("chatDropdown");
+                dropdown.style.display = (dropdown.style.display === "none" || dropdown.style.display === "") ? "block" : "none";
+              }
+
+              // Close dropdown when clicking outside
+              document.addEventListener("click", function(event) {
+                var dropdown = document.getElementById("chatDropdown");
+                var toggleButton = document.querySelector(".nav-link");
+
+                if (!dropdown.contains(event.target) && !toggleButton.contains(event.target)) {
+                  dropdown.style.display = "none";
+                }
+              });
+            </script>
             <div class="d-none d-md-flex">
-              <a href="?theme=dark" class="nav-link px-0 hide-theme-dark" title="Enable dark mode" data-bs-toggle="tooltip" data-bs-placement="bottom">
+
+              <a href="?theme=dark" class="nav-link px-0 hide-theme-dark" title="Enable dark mode" data-bs-toggle="tooltip"
+                data-bs-placement="bottom">
                 <!-- Download SVG icon from http://tabler-icons.io/i/moon -->
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                   <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                   <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
                 </svg>
               </a>
-              <a href="?theme=light" class="nav-link px-0 hide-theme-light" title="Enable light mode" data-bs-toggle="tooltip" data-bs-placement="bottom">
+              <a href="?theme=light" class="nav-link px-0 hide-theme-light" title="Enable light mode" data-bs-toggle="tooltip"
+                data-bs-placement="bottom">
                 <!-- Download SVG icon from http://tabler-icons.io/i/sun -->
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                   <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -90,9 +132,37 @@ $user_category = $_SESSION['user_category'];
                   <path d="M3 12h1m8 -9v1m8 8h1m-9 8v1m-6.4 -15.4l.7 .7m12.1 -.7l-.7 .7m0 11.4l.7 .7m-12.1 -.7l-.7 .7" />
                 </svg>
               </a>
+              <?php if ($user_category != "C" AND $user_category != "S") { ?>
               <div class="nav-item dropdown d-none d-md-flex me-3">
+                <a href="#" class="nav-link px-0" data-bs-toggle="dropdown" tabindex="-1" aria-label="Show notifications">
+                  <!-- Download SVG icon from http://tabler-icons.io/i/bell -->
+                  <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <path d="M10 5a2 2 0 1 1 4 0a7 7 0 0 1 4 6v3a4 4 0 0 0 2 3h-16a4 4 0 0 0 2 -3v-3a7 7 0 0 1 4 -6" />
+                    <path d="M9 17v1a3 3 0 0 0 6 0v-1" />
+                  </svg>
+                  <?php
+                  $fetch_notifcations = $mysqli_connect->query("SELECT * FROM tbl_notifications WHERE user_id='$user_id' AND status = 1") or die(mysqli_error()); ?>
+                  <?php if ($fetch_notifcations->num_rows > 0) { ?>
+                    <span class="badge bg-red"></span>
+                  <?php } ?>
+                </a>
+
+                  <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-end dropdown-menu-card">
+                    <div class="card">
+                      <div class="card-header">
+                        <h3 class="card-title">Notifications</h3>
+                      </div>
+                      <div class="list-group list-group-flush list-group-hoverable" id="div_notif">
+
+
+                      </div>
+                    </div>
+                  </div>
               </div>
+              <?php } ?>
             </div>
+
             <div class="nav-item dropdown">
               <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown" aria-label="Open user menu">
                 <span class="avatar avatar-sm"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-user">
@@ -119,16 +189,16 @@ $user_category = $_SESSION['user_category'];
       <header class="navbar-expand-md">
         <div class="collapse navbar-collapse" id="navbar-menu">
 
-         
-            <div class="navbar">
-              <div class="container-xl">
-                <?php include "components/navbar.php"; ?>
 
-                <div class="my-2 my-md-0 flex-grow-1 flex-md-grow-0 order-first order-md-last">
+          <div class="navbar">
+            <div class="container-xl">
+              <?php include "components/navbar.php"; ?>
 
-                </div>
+              <div class="my-2 my-md-0 flex-grow-1 flex-md-grow-0 order-first order-md-last">
+
               </div>
             </div>
+          </div>
 
         </div>
       </header>
@@ -269,7 +339,39 @@ $user_category = $_SESSION['user_category'];
   <script src="./dist/js/tabler.min.js?1684106062" defer></script>
   <script src="./dist/js/demo.min.js?1684106062" defer></script>
   <script>
-    $(document).ready(function() {});
+    function makedRead(id) {
+
+      $.ajax({
+        type: "POST",
+        url: "ajax/markedRead.php",
+        data: {
+          id: id,
+        },
+        success: function(data) {
+          if (data == 1) {
+            showNotifications()
+          } else {
+            alert(data);
+          }
+
+        }
+      });
+    }
+
+    function showNotifications() {
+      $.ajax({
+        type: "POST",
+        url: "ajax/notifications.php",
+        data: {},
+        success: function(data) {
+          $("#div_notif").html(data);
+        }
+      });
+    }
+
+    $(document).ready(function() {
+      showNotifications();
+    });
 
     function logout() {
       swal({

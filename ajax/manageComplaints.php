@@ -1,17 +1,29 @@
 <?php
 require_once '../core/config.php';
 
-$complainee_id = $mysqli_connect->real_escape_string($_POST['complainee_id']);
+// $complainee_id = $mysqli_connect->real_escape_string($_POST['complainee_id']);
 $complainant_id = $_SESSION['dvsa_user_id'];
-$violation_id = $mysqli_connect->real_escape_string($_POST['violation_id']);
+$violation_id = isset($_POST['violations']) ? implode(',', $_POST['violations']) : '';
 $remarks = $mysqli_connect->real_escape_string($_POST['remarks']);
 $complaint_id = $mysqli_connect->real_escape_string($_POST['complaint_id']);
 $date = getCurrentDate();
 $type = $mysqli_connect->real_escape_string($_POST['type']);
 
+$other_violations = $mysqli_connect->real_escape_string($_POST['other_violations']);
+$year = $mysqli_connect->real_escape_string($_POST['year']);
+$section = $mysqli_connect->real_escape_string($_POST['section']);
+$section_type = $mysqli_connect->real_escape_string($_POST['section_type']);
+$complainee = $mysqli_connect->real_escape_string($_POST['complainee']);
+$complainee_program = $mysqli_connect->real_escape_string($_POST['complainee_program']);
+$complainee_year = $mysqli_connect->real_escape_string($_POST['complainee_year']);
+$complainee_section = $mysqli_connect->real_escape_string($_POST['complainee_section']);
+$complainee_section_type = $mysqli_connect->real_escape_string($_POST['complainee_section_type']);
+$date_reported = $mysqli_connect->real_escape_string($_POST['date_reported']);
+$person_involved = $mysqli_connect->real_escape_string($_POST['person_involved']);
+
 $file_name = "";
-$upload_dir = "../uploads/"; 
-$allowed_types = ['jpg', 'jpeg', 'png', 'pdf', 'doc', 'docx']; 
+$upload_dir = "uploads/";
+$allowed_types = ['jpg', 'jpeg', 'png', 'pdf', 'doc', 'docx'];
 
 if (isset($_FILES['file']) && $_FILES['file']['error'] == 0) {
     $file_ext = strtolower(pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION));
@@ -34,12 +46,21 @@ if (isset($_FILES['file']) && $_FILES['file']['error'] == 0) {
 }
 
 if ($type == "add") {
-    $sql = $mysqli_connect->query("
-        INSERT INTO tbl_complaints 
-        (complainee_id, complainant_id, violation_id, remarks, date_added, file_path) 
-        VALUES 
-        ('$complainee_id', '$complainant_id', '$violation_id', '$remarks', '$date', '$file_name')
-    ") or die(mysqli_error());
+    // $sql = $mysqli_connect->query("
+    //     INSERT INTO tbl_complaints 
+    //     (`complainee_id`, `complainee`, `complainant_id`, `violation_id`, `other_violations`, `year`, `section`, `section_type`, `complainee_program`, `complainee_year`, `complainee_section`, `complainee_section_type`, `date_reported`, `person_involved`, `remarks`, `file_path`, `date_added`) 
+    //     VALUES 
+    //     ('$complainee_id', '$complainee', '$complainant_id', '$violation_id', '$other_violations', '$year', '$section','$remarks', '$date')
+    // ") or die(mysqli_error());
+
+    $sql = $mysqli_connect->query("INSERT INTO tbl_complaints (`complainee`, `complainant_id`, `violation_id`, `other_violations`, `year`, `section`, `section_type`, `complainee_program`, `complainee_year`, `complainee_section`, `complainee_section_type`, `date_reported`, `person_involved`, `remarks`, `file_path`) VALUES  ('$complainee', '$complainant_id', '$violation_id', '$other_violations', '$year', '$section', '$section_type', '$complainee_program', '$complainee_year', '$complainee_section', '$complainee_section_type', '$date_reported', '$person_involved', '$remarks', '$file_name')
+") or die($mysqli_connect->error);
+
+    //  file_path='$file_name'
+    $fetch_do = $mysqli_connect->query("SELECT user_id FROM tbl_users WHERE user_category='A'") or die(mysqli_error());
+    while ($do_row = $fetch_do->fetch_array()) {
+        add_notification($do_row[0], "New Complaint Received", 'A complaint has been filed against ' . $complainee . ' of ' . $complainee_program . '. Please review and take necessary action.');
+    }
 
     echo ($sql) ? 1 : 0;
 } else { // Update
@@ -49,7 +70,7 @@ if ($type == "add") {
 
     $update_query = "
         UPDATE tbl_complaints 
-        SET complainee_id='$complainee_id', violation_id='$violation_id', remarks='$remarks'
+        SET violation_id='$violation_id', remarks='$remarks', other_violations='$other_violations', year='$year', section='$section', section_type='$section_type', complainee='$complainee', complainee_program='$complainee_program', complainee_year='$complainee_year', complainee_section='$complainee_section', complainee_section_type='$complainee_section_type', date_reported='$date_reported', person_involved='$person_involved'
     ";
 
     if ($file_name != "") {
@@ -66,4 +87,3 @@ if ($type == "add") {
 
     echo ($sql) ? 1 : 0;
 }
-?>

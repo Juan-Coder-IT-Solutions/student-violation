@@ -1,25 +1,25 @@
 <div class="page-wrapper">
-    <!-- Page header -->
-    <div class="page-header d-print-none">
-        <div class="container-xl">
-            <div class="row g-2 align-items-center">
-                <div class="col">
-                    <h2 class="page-title">
-                        Complainant Portal
-                    </h2>
-                </div>
-            </div>
+  <!-- Page header -->
+  <div class="page-header d-print-none">
+    <div class="container-xl">
+      <div class="row g-2 align-items-center">
+        <div class="col">
+          <h2 class="page-title">
+            Complainant Portal
+          </h2>
         </div>
+      </div>
     </div>
-    <!-- Page body -->
-    <div class="page-body">
-        <div class="container-xl">
-            <div class="row row-cards">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="row g-2 align-items-center">
-                              <?php if($user_category == "A" || $user_category == "C"){ ?>
+  </div>
+  <!-- Page body -->
+  <div class="page-body">
+    <div class="container-xl">
+      <div class="row row-cards">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+              <!-- <div class="row g-2 align-items-center">
+                              <?php if ($user_category == "A" || $user_category == "C") { ?>
                                 <div class="col-6 col-sm-4 col-md-2 col-xl py-3">
                                     <a href="#" onclick="addEntry()" class="btn btn-primary w-100">
                                         Add Complaint
@@ -31,36 +31,35 @@
                                     </a>
                                 </div>
                               <?php } ?>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table align-items-center table-flush table-hover" id="dt_details">
-                                    <thead class="thead-light">
-                                        <tr>
-                                            <th style='width: 5px;'>
-                                                <div class='form-check form-check-success'><label class='form-check-label'><input type='checkbox' class='dt_id form-check-input' onchange="checkAll(this,'dt_id')"><i class='input-helper'></i></label></div>
-                                            </th>
-                                            <th style='width: 5px;'></th>
-                                            <th>#</th>
-                                            <th>Complainee</th>
-                                            <th>Complainant</th>
-                                            <th>Violation</th>
-                                            <th>Description</th>
-                                            <th>File Preview</th>
-                                            <th>Date Added</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                            </div> -->
             </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table align-items-center table-flush table-hover" id="dt_details">
+                  <thead class="thead-light">
+                    <tr>
+                      <th style='width: 5px;'></th>
+                      <th style='width: 5px;'></th>
+                      <th>#</th>
+                      <th>Complainee</th>
+                      <th>Complainant</th>
+                      <th>Violation</th>
+                      <th>Description</th>
+                      <th>File Preview</th>
+                      <th>Status</th>
+                      <th>Reported Date</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </div>
 <?php require_once 'modals/modal_complaints.php'; ?>
 <script>
@@ -140,8 +139,28 @@
         var json = JSON.parse(data);
         console.log(data);
         $("#complaint_id").val(json.complaint_id);
-        $("#complainee_id").val(json.complainee_id);
-        $("#violation_id").val(json.violation_id);
+        $("#complainee").val(json.complainee);
+        $("#section").val(json.section);
+        $("#section_type").val(json.section_type);
+        $("#year").val(json.year);
+        $("#remarks").val(json.remarks);
+        $("#date_reported").val(json.date_reported);
+
+        $("#complainee_program").val(json.complainee_program);
+        $("#complainee_section").val(json.complainee_section);
+        $("#complainee_section_type").val(json.complainee_section_type);
+        $("#complainee_year").val(json.complainee_year);
+        $("#other_violations").val(json.other_violations);
+        $("#person_involved").val(json.person_involved);
+
+        $("input[name='violations[]']").prop("checked", false);
+
+        if (json.violation_id) {
+          var violationIds = json.violation_id.split(','); // Convert to array
+          violationIds.forEach(function(violationId) {
+            $("input[name='violations[]'][value='" + violationId.trim() + "']").prop("checked", true);
+          });
+        }
         $("#remarks").val(json.remarks);
         $(".modal_type").val("update");
       }
@@ -151,40 +170,40 @@
   $("#frm_add").submit(function(e) {
     e.preventDefault();
     $("#btn_submit_entry").prop("disabled", true);
-    
+
     var type = $(".modal_type").val();
     var formData = new FormData(this); // Use FormData to handle file uploads
 
     $.ajax({
-        type: "POST",
-        url: "ajax/manageComplaints.php",
-        data: formData,
-        contentType: false, // Important for file upload
-        processData: false, // Prevent jQuery from processing the data
-        success: function(data) {
-            if (data == 1) {
-                if (type == "add") {
-                    success_add();
-                } else {
-                    success_update();
-                }
-                $('#frm_add')[0].reset(); // Reset form after submission
-                getEntry();
-                $("#modal_entry").modal("hide");
-            } else if (data == 2) {
-                entry_already_exists();
-            } else {
-                failed_query("Complainant Portal");
-                alert(data);
-            }
-            $("#btn_submit_entry").prop("disabled", false);
-        },
-        error: function(xhr, status, error) {
-            alert("An error occurred: " + xhr.responseText);
-            $("#btn_submit_entry").prop("disabled", false);
+      type: "POST",
+      url: "ajax/manageComplaints.php",
+      data: formData,
+      contentType: false, // Important for file upload
+      processData: false, // Prevent jQuery from processing the data
+      success: function(data) {
+        if (data == 1) {
+          if (type == "add") {
+            success_add();
+          } else {
+            success_update();
+          }
+          $('#frm_add')[0].reset(); // Reset form after submission
+          getEntry();
+          $("#modal_entry").modal("hide");
+        } else if (data == 2) {
+          entry_already_exists();
+        } else {
+          failed_query("Complainant Portal");
+          alert(data);
         }
+        $("#btn_submit_entry").prop("disabled", false);
+      },
+      error: function(xhr, status, error) {
+        alert("An error occurred: " + xhr.responseText);
+        $("#btn_submit_entry").prop("disabled", false);
+      }
     });
-});
+  });
 
 
 
@@ -203,22 +222,17 @@
       },
       "columns": [
         {
-          "mRender": function(data, type, row) {
-            if(row.hide_this == "A" || row.hide_this == "C"){
-              return "<div class='form-check form-check-success'><label class='form-check-label'><input type='checkbox' value=" + row.complaint_id + " class='dt_id form-check-input'><i class='input-helper'></i></label></div>";
-            }else{
-              return "";
-            }
-          }
+          "data": "btn_check"
         },
         {
           "mRender": function(data, type, row) {
-            if(row.hide_this == "A" || row.hide_this == "C"){
+            if (row.hide_this == "A" || row.hide_this == "C") {
+              // return "<center><button class='btn btn-primary' onclick='getEntryDetails(" + row.complaint_id + ")'><span class='mdi mdi-grease-pencil'></span></button></center>";
               return "<center><button class='btn btn-primary' onclick='getEntryDetails(" + row.complaint_id + ")'><span class='mdi mdi-grease-pencil'></span></button></center>";
-            }else{
+            } else {
               return "";
             }
-           
+
           }
         },
         {
@@ -237,11 +251,14 @@
           "data": "remarks"
         },
         {
-                "data": "file", // Add file preview column
-                "mRender": function(data, type, row) {
-                    return row.file ? row.file : "No File";
-                }
-            },
+          "data": "file", // Add file preview column
+          "mRender": function(data, type, row) {
+            return row.file ? row.file : "No File";
+          }
+        },
+        {
+          "data": "stat"
+        },
         {
           "data": "date_added"
         }
@@ -249,4 +266,43 @@
     });
 
   }
+
+  function changeStatus(id, status){
+        swal({
+          title: "Are you sure?",
+          text: "You will not be able to recover these entries!",
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonClass: "btn-danger",
+          confirmButtonText: "Yes, update it!",
+          cancelButtonText: "No, cancel!",
+          closeOnConfirm: false,
+          closeOnCancel: false
+        },
+        function(isConfirm) {
+          if (isConfirm) {
+
+            $.ajax({
+              type: "POST",
+              url: "ajax/changeStatus.php",
+              data: {
+                id: id,
+                status: status
+              },
+              success: function(data) {
+                if (data == 1) {
+                  success_update();
+                  getEntry();
+                } else {
+                  failed_query("Complaints");
+                }
+              }
+            });
+
+
+          } else {
+            swal("Cancelled", "Entries are safe :)", "error");
+          }
+        });
+    }
 </script>

@@ -115,6 +115,8 @@ function course_name($id)
 	}
 }
 
+
+
 function violation_name($id)
 {
 
@@ -142,6 +144,8 @@ function degree_name($id)
 		return "---";
 	}
 }
+
+
 
 function task_row($id)
 {
@@ -208,6 +212,19 @@ function total_offenses()
 	$row = $fetchData->fetch_array();
 
 	return $row[0];
+}
+
+function add_notification($user_id,$title,$remarks)
+{
+
+	global $mysqli_connect;
+
+	$query = $mysqli_connect->query("INSERT INTO `tbl_notifications`(`title`, `remarks`, `status`, `user_id`) VALUES ('$title','$remarks',1, $user_id)");
+	if($query){
+		return 1;
+	}else{
+		return 0;
+	}
 }
 
 function timeAgoFromDatetime($datetime) {

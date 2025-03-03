@@ -21,7 +21,8 @@ if (isset($_SESSION['dvsa_user_id'])) {
     <link href="./dist/css/tabler-payments.min.css?1684106062" rel="stylesheet" />
     <link href="./dist/css/tabler-vendors.min.css?1684106062" rel="stylesheet" />
     <link href="./dist/css/demo.min.css?1684106062" rel="stylesheet" />
-    <link rel="stylesheet" href="dist/sweetalert/sweetalert.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="dist/sweetalert/sweetalert.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
     <style>
         @import url('https://rsms.me/inter/inter.css');
@@ -101,12 +102,95 @@ if (isset($_SESSION['dvsa_user_id'])) {
                         </div>
                         <div class="text-center mt-3">
                             <a href="forgot_password.php" class="text-muted">Forgot Password?</a>
+
+                            <p> or</p>
+                            <a href="#" onclick="modalSignUp()" class="text-muted">Sign-up for Complainant</a>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+
+    <form action="" method='POST' id='frm_signup'>
+        <div class="modal modal-blur fade" id="modal_entry" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">User</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <input type="hidden" value="add" class="form-control modal_type" name="type">
+                            <input type="hidden" class="form-control" id="user_id" name="user_id">
+                            <div class="col-sm-4">
+                                <div class="mb-3">
+                                    <label class="form-label">First Name</label>
+                                    <input type="text" class="form-control" id="user_fname" name="user_fname" autocomplete="off" required>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="mb-3">
+                                    <label class="form-label">Middle Name</label>
+                                    <input type="text" class="form-control" id="user_mname" name="user_mname" autocomplete="off">
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="mb-3">
+                                    <label class="form-label">Last Name <strong style="color:red;">*</strong></label>
+                                    <input type="text" class="form-control" id="user_lname" name="user_lname" autocomplete="off" required>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="mb-3">
+                                    <label class="form-label">Email <strong style="color:red;">*</strong></label>
+                                    <input type="email" class="form-control" id="user_email" name="user_email" autocomplete="off" required>
+                                </div>
+                            </div>
+
+                            <input type="hidden" class="form-control" value="C" id="user_category" name="user_category" autocomplete="off">
+
+                            <div class="col-sm-6">
+                                <div class="mb-3">
+                                    <label class="form-label">Username <strong style="color:red;">*</strong></label>
+                                    <input type="text" class="form-control" id="username" name="username" autocomplete="off" required>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6 div_password" id="div_password">
+                                <div class="mb-3">
+                                    <label class="form-label">Password</label>
+                                    <div class="input-group">
+                                        <input type="password" class="form-control" name="password" id="create_password" required placeholder="Your password" autocomplete="off">
+                                        <span class="input-group-text eye-icon" id="togglePassword">
+                                            <i class="fa fa-eye-slash" id="eyeIcon"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 div_password" id="div_password">
+                                <div class="mb-3">
+                                    <label class="form-label">Confirm Password</label>
+                                    <div class="input-group">
+                                        <input type="password" class="form-control" id="confirm_password" required placeholder="Your password" autocomplete="off">
+                                        <span class="input-group-text eye-icon" id="togglePassword">
+                                            <i class="fa fa-eye-slash" id="eyeIcon"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn me-auto" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" id="btn_submit_entry" class="btn btn-primary">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
 
     <!-- Libs JS -->
     <!-- Tabler Core -->
@@ -123,6 +207,45 @@ if (isset($_SESSION['dvsa_user_id'])) {
                 $("input[name='username']").val(username);
                 $("#remember_me").prop("checked", true);
             }
+        });
+
+        function modalSignUp() {
+            $("#modal_entry").modal("show");
+        }
+
+        $("#frm_signup").submit(function(e) {
+            e.preventDefault();
+            $("#btn_submit_entry").prop("disabled", true);
+            var type = $(".modal_type").val();
+            var create_password = $("#create_password").val();
+            var confirm_password = $("#confirm_password").val();
+
+            if (confirm_password != create_password) {
+                alert("Passwords do not match. Please try again.");
+            } else {
+                $.ajax({
+                    type: "POST",
+                    url: "ajax/manageUser.php",
+                    data: $("#frm_signup").serialize(),
+                    success: function(data) {
+                        if (data == 1) {
+                            alert("Signup Successful! You can now login.");
+
+                            $('#frm_signup').each(function() {
+                                this.reset();
+                            });
+                            $("#modal_entry").modal("hide");
+                        } else if (data == 2) {
+                            alert("Account already exist.");
+                        } else {
+                            alert(data);
+                        }
+                        $("#btn_submit_entry").prop("disabled", false);
+                    }
+
+                });
+            }
+
         });
 
         // Function to get cookie by name
@@ -157,24 +280,23 @@ if (isset($_SESSION['dvsa_user_id'])) {
                         }
                         window.location = 'index.php';
                     } else {
-                        alert(data); 
+                        alert(data);
                     }
                 }
             });
         });
 
-        document.getElementById("togglePassword").addEventListener("click", function() {
-            var passwordField = document.getElementById("password");
-            var eyeIcon = document.getElementById("eyeIcon");
+        $(document).on('click', '.eye-icon', function() {
+            const input = $(this).siblings('input');
+            const icon = $(this).find('i');
 
-            if (passwordField.type === "password") {
-                passwordField.type = "text";
-                eyeIcon.classList.remove("fa-eye-slash");
-                eyeIcon.classList.add("fa-eye");
+            // Toggle the input type between password and text
+            if (input.attr('type') === 'password') {
+                input.attr('type', 'text');
+                icon.removeClass('fa-eye-slash').addClass('fa-eye');
             } else {
-                passwordField.type = "password";
-                eyeIcon.classList.remove("fa-eye");
-                eyeIcon.classList.add("fa-eye-slash");
+                input.attr('type', 'password');
+                icon.removeClass('fa-eye').addClass('fa-eye-slash');
             }
         });
     </script>

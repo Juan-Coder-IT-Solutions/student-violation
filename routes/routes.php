@@ -21,6 +21,10 @@
 		require view.'offenses.php';
 	}else if($page == 'profile'){
 		require view.'profile.php';
+	}else if($page == 'messages'){
+		require view.'messages.php';
+	}else if($page == 'complaint-report'){
+		require view.'complainant_report.php';
 	}else{
 		if(!empty($page) or $page != $page){
 			require './404.php';

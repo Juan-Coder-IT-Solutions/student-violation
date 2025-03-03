@@ -58,7 +58,7 @@
                                             <th  style='width: 5px;'></th>
                                             <th>#</th>
                                             <th>Full Name</th>
-                                            <th>Course</th>
+                                            <th>Degree Program</th>
                                             <th>Year Level</th>
                                             <th>Section</th>
                                             <th>Gender</th>
@@ -272,7 +272,7 @@
           "data": "full_name"
         },
         {
-          "data": "course"
+          "data": "degree"
         },
         {
           "data": "year_level"

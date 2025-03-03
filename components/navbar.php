@@ -18,7 +18,7 @@
 
   <?php //ADMIN
    if($user_category == "A"){ ?>
-  <li class="nav-item <?= ($page == "courses" ? "active" : "") ?>">
+  <!-- <li class="nav-item <?= ($page == "courses" ? "active" : "") ?>">
     <a class="nav-link" href="index.php?page=courses">
       <span class="nav-link-icon d-md-none d-lg-inline-block">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-book">
@@ -34,7 +34,7 @@
         Courses
       </span>
     </a>
-  </li>
+  </li> -->
   <?php } ?>
 
   <?php //ADMIN
@@ -136,7 +136,7 @@
   <?php } ?>
 
   <?php //ADMIN, COMPLAINANT
-    if($user_category == "A" || $user_category == "C"  || $user_category == "S"){ 
+    if($user_category != "S"){ 
   ?>
   <li class="nav-item <?= ($page == "complainant_portal" ? "active" : "") ?>">
     <a class="nav-link" href="index.php?page=complainant_portal">
@@ -149,7 +149,7 @@
         </svg>
       </span>
       <span class="nav-link-title">
-        Complainant Portal
+        Complainants
       </span>
     </a>
   </li>
@@ -179,6 +179,9 @@ if($user_category == "A" || $user_category == "DO" || $user_category == "G" || $
       </a>
       <a class="dropdown-item" href="index.php?page=violation-report">
         Violation Report
+      </a>
+      <a class="dropdown-item" href="index.php?page=complaint-report">
+        Complaint Report
       </a>
     </div>
   </li>
