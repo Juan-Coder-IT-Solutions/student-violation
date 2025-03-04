@@ -142,6 +142,8 @@
         $("#password").val(json.password);
         $("#user_id").val(json.user_id);
         $("#user_email").val(json.user_email);
+        $("#user_category").val(json.user_category).trigger("change");
+        $("#degree_id").val(json.degree_id).trigger("change");
         $(".modal_type").val("update");
         $("#div_password").hide();
       }
