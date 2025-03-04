@@ -222,7 +222,16 @@
       },
       "columns": [
         {
-          "data": "btn_check"
+          // "data": "btn_check"
+          "mRender": function(data, type, row) {
+            if (row.user_category != "A") {
+              // return "<center><button class='btn btn-primary' onclick='getEntryDetails(" + row.complaint_id + ")'><span class='mdi mdi-grease-pencil'></span></button></center>";
+              return row.btn_check;
+            } else {
+              return "";
+            }
+
+          }
         },
         {
           "mRender": function(data, type, row) {

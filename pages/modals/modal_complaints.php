@@ -56,13 +56,13 @@
                 <div class="col-sm-4">
                   <div class="mb-3">
                     <label class="form-label"><strong>Year:</strong></label>
-                    <input type="text" class="form-control" id="year" name="year" required>
+                    <input type="text" class="form-control" id="year" name="year" >
                   </div>
                 </div>
                 <div class="col-sm-4">
                   <div class="mb-3">
                     <label class="form-label"><strong>Section:</strong></label>
-                    <input type="text" class="form-control" id="section" name="section" required>
+                    <input type="text" class="form-control" id="section" name="section" >
                   </div>
                 </div>
                 <div class="col-sm-4">
@@ -88,7 +88,7 @@
                 <div class="col-sm-6">
                   <div class="mb-3">
                     <label class="form-label"><strong>Complainee's Degree Program:</strong></label>
-                    <select class="form-control" id="complainee_program" name="complainee_program" required>
+                    <select class="form-control" id="complainee_program" name="complainee_program" >
                       <option value="">Please Select:</option>
                       <?php
                       $fetch_degree = $mysqli_connect->query("SELECT * FROM tbl_degree") or die(mysqli_error());
@@ -102,13 +102,13 @@
                 <div class="col-sm-6">
                   <div class="mb-3">
                     <label class="form-label"><strong>Complainee's Year:</strong></label>
-                    <input type="text" class="form-control" id="complainee_year" name="complainee_year" required>
+                    <input type="text" class="form-control" id="complainee_year" name="complainee_year" >
                   </div>
                 </div>
                 <div class="col-sm-6">
                   <div class="mb-3">
                     <label class="form-label"><strong>Complainee's Section:</strong></label>
-                    <input type="text" class="form-control" id="complainee_section" name="complainee_section" required>
+                    <input type="text" class="form-control" id="complainee_section" name="complainee_section" >
                   </div>
                 </div>
                 <div class="col-sm-6">

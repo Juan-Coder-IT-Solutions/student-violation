@@ -67,6 +67,7 @@ while ($row = $fetch->fetch_array()) {
     $list['remarks'] = $row['remarks'];
     $list['status'] = $row['status'];
     $list['stat'] = $colored_stat; // Colored status as simple text
+    $list['user_category'] = $user_category;
 
     $list['btn_check'] = $btn;
     $list['file'] = $preview;
