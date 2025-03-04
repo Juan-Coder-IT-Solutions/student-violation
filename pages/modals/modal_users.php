@@ -48,6 +48,21 @@
                 </select>
               </div>
             </div>
+            <div class="col-sm-12">
+              <div class="mb-3">
+                <label class="form-label">Degree Program <strong style="color:red;">*</strong></label>
+                <select class="select2 form-control" id="degree_id" name="degree_id" required>
+                  <option value="">Please Select</option>
+                  <?php
+                  $fetch_degree = $mysqli_connect->query("SELECT * FROM tbl_degree") or die(mysqli_error());
+                  while ($dRow = $fetch_degree->fetch_array()) { ?>
+                    <option value='<?= $dRow['degree_id'] ?>'>
+                      <?= $dRow['degree_name'] ?>
+                    </option>";
+                  <?php } ?>
+                </select>
+              </div>
+            </div>
 
             <div class="col-sm-6">
               <div class="mb-3">
